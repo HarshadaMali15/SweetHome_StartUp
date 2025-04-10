@@ -40,12 +40,12 @@ export default function SellersPage() {
     }
 
     return (
-        <div className="p-6">
+        <div className="p-6 w-full bg-gradient-to-br from-yellow-100 to-white relative overflow-hidden pt-20 min-h-screen">
             <h1 className="text-2xl font-bold mb-6">Sellers</h1>
             <div className="bg-white rounded shadow overflow-x-auto">
                 <table className="min-w-full">
                     <thead>
-                        <tr className="bg-gray-100">
+                        <tr className="bg-yellow-300">
                             <th className="py-2 px-4 text-left">Name</th>
                             <th className="py-2 px-4 text-left">Email</th>
                             <th className="py-2 px-4 text-left">Mobile</th>

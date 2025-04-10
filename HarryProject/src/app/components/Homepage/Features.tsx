@@ -4,27 +4,27 @@ const features = [
   {
     icon: <MapPin className="w-6 h-6" />,
     title: "Free delivery",
-    description: "Lorem ipsum dolor sit amet, consectetur adipi elit.",
+    description: "Fast and free delivery on all orders above ₹500 across India.",
   },
   {
     icon: <ShieldCheck className="w-6 h-6" />,
     title: "100% secure payment",
-    description: "Lorem ipsum dolor sit amet, consectetur adipi elit.",
+    description: "Your transactions are encrypted and fully secured.",
   },
   {
     icon: <Award className="w-6 h-6" />,
     title: "Quality guarantee",
-    description: "Lorem ipsum dolor sit amet, consectetur adipi elit.",
+    description: "We ensure premium quality with every handmade item you purchase.",
   },
   {
     icon: <Percent className="w-6 h-6" />,
-    title: "guaranteed savings",
-    description: "Lorem ipsum dolor sit amet, consectetur adipi elit.",
+    title: "Guaranteed savings",
+    description: "Enjoy the best deals and seasonal discounts every month.",
   },
   {
     icon: <Gift className="w-6 h-6" />,
     title: "Daily offers",
-    description: "Lorem ipsum dolor sit amet, consectetur adipi elit.",
+    description: "Fresh offers and flash sales every day on selected categories.",
   },
 ]
 
@@ -47,4 +47,3 @@ export default function Features() {
     </section>
   )
 }
-

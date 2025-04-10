@@ -45,7 +45,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         // Expect the returned data to have an "items" array
         setCartItems(data.items || []);
       } else {
-        toast.error("Failed to load cart.");
+       // toast.error("Failed to load cart.");
       }
     } catch (error) {
       toast.error("Error loading cart.");

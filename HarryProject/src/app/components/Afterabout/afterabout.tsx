@@ -4,7 +4,7 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import { ArrowRight, Check } from "lucide-react"
-import Navbar from "../Homepage/Navbar"
+import Navbar from "../After_log_homepage/Navbar"
 
 export default function About() {
   const [count, setCount] = useState({ years: 0, products: 0, customers: 0 })

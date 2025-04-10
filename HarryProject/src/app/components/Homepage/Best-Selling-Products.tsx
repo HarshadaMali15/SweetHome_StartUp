@@ -52,10 +52,10 @@ export default function BestSellingProducts() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-bold">Best selling products</h2>
-          <Link href={"/sign-up"}>
+          {/* <Link href={"/sign-up"}>
           <button className="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors">
             View All
-          </button></Link>
+          </button></Link> */}
         </div>
 
         {/* Products Grid */}
@@ -85,7 +85,7 @@ export default function BestSellingProducts() {
                 <h3 className="font-medium text-lg">{product.name}</h3>
 
                 {/* Rating */}
-                <div className="flex items-center gap-1">
+                {/* <div className="flex items-center gap-1">
                   <div className="flex text-yellow-400">
                     <Star className="w-4 h-4 fill-current" />
                     <Star className="w-4 h-4 fill-current" />
@@ -94,7 +94,7 @@ export default function BestSellingProducts() {
                     <Star className="w-4 h-4 fill-current opacity-50" />
                   </div>
                   <span className="text-gray-500 text-sm">({product.reviews})</span>
-                </div>
+                </div> */}
 
                 {/* Price */}
                 <div className="flex items-center gap-2">

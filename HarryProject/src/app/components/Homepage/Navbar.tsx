@@ -22,7 +22,7 @@ export default function Navbar() {
           </div>
 
           {/* Categories and Search */}
-          <div className="hidden md:flex items-center space-x-4 flex-1 max-w-2xl mx-8">
+          {/* <div className="hidden md:flex items-center space-x-4 flex-1 max-w-2xl mx-8">
             <div className="flex-1 relative">
               <input
                 type="text"
@@ -31,7 +31,7 @@ export default function Navbar() {
               />
               <Search className="absolute right-3 top-2.5 text-gray-400 w-5 h-5" />
             </div>
-          </div>
+          </div> */}
 
           {/* Navigation Links */}
           <div className="flex items-center space-x-8">
@@ -44,6 +44,10 @@ export default function Navbar() {
               <Link href="/log-in" className="font-medium">
                 LOG IN
               </Link>
+              <Link href="/admin/login" className="font-medium">
+                Admin
+              </Link>
+              
             </div>
 
             {/* Sell Button */}
@@ -57,11 +61,7 @@ export default function Navbar() {
             </motion.button>
 
             {/* Icons */}
-            <div className="flex items-center space-x-4">
-              <User className="w-6 h-6 text-gray-700" />
-              <Bookmark className="w-6 h-6 text-gray-700" />
-              <ShoppingCart className="w-6 h-6 text-gray-700" />
-            </div>
+            
           </div>
         </div>
       </div>

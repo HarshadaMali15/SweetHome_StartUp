@@ -92,7 +92,7 @@ function NavLink({
   return (
     <Link href={href}>
       <div className={`mb-2 px-4 py-2 rounded ${
-        active ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-50'
+        active ? 'bg-yellow-200 text-white-600' : 'hover:bg-yellow-100'
       }`}>
         {children}
       </div>

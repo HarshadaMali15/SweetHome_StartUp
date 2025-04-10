@@ -14,7 +14,7 @@ export const categories = [
   { id: "Accessories", name: "Accessories", image: "/homepage/accesories.jpg", hasSubcategories: true },
   { id: "Home", name: "Home Decor", image: "/homepage/homedecore1.png", hasSubcategories: true },
   { id: "Organic", name: "Organic and Natural", image: "/homepage/organic1.jpg", hasSubcategories: true },
-  { id: "Kids", name: "Kids Special", image: "/homepage/babycloth.jpg", hasSubcategories: true },
+  { id: "Kids", name: "Paintings and Arts", image: "/homepage/babycloth.jpg", hasSubcategories: true },
   { id: "Gifts", name: "Gifts and Festive", image: "/homepage/gift2.jpg", hasSubcategories: true },
   { id: "Musical", name: "Musical Instruments", image: "/homepage/instrument.jpg", hasSubcategories: true },
   { id: "Handmade", name: "Handmade Footwear", image: "/homepage/footware.jpg", hasSubcategories: true }

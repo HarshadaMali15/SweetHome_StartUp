@@ -67,11 +67,6 @@ export default function Navbar() {
 
                 {isDropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg  z-50">
-                  
-                    <Link  href="" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
-                      Profile
-                    </Link>
-                  
                    
                     <button
                       onClick={handleLogout}
@@ -93,9 +88,7 @@ export default function Navbar() {
             )}
           
            
-          <Link href="/wishlist" className="text-gray-600 hover:text-gray-800">
-            <Heart className="h-5 w-5" />
-          </Link>
+          
           <Link href="/cart" className="text-gray-600 hover:text-gray-800">
             <ShoppingCart className="h-5 w-5" />
           </Link>

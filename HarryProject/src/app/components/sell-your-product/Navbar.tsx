@@ -53,8 +53,8 @@ export default function Navbar() {
                     {/* <Link href="/seller/order" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
                       Order Tracking
                     </Link> */}
-                     <Link href="/seller/payment" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
-                      Payment
+                     <Link href="/seller/orders" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                      My Orders
                     </Link>
                     <button
                       onClick={handleLogout}
