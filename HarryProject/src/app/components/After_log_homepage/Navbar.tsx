@@ -40,7 +40,7 @@ export default function Navbar() {
           <Link href="/shop" className="text-gray-600 hover:text-gray-800">
             Shop
           </Link>
-          <Link href="/aboutt" className="text-gray-600 hover:text-gray-800">
+          <Link href="/afterabout" className="text-gray-600 hover:text-gray-800">
             About
           </Link>
           <Link href="/contact" className="text-gray-600 hover:text-gray-800">

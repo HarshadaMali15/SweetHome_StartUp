@@ -12,6 +12,7 @@ import { Separator } from "@/components/ui/separator";
 import { AuthProvider } from "@/context/auth-context";
 
 interface Product {
+  [x: string]: any;
   _id: string;
   name: string;
   description: string;
@@ -307,6 +308,79 @@ export default function ProductDetailPage() {
               Contact: {product.contact}
             </Button>
           </div>
+
+          {/* Feedback Form */}
+<div className="mt-10 p-6 border rounded-lg bg-yellow-50">
+  <h2 className="text-lg font-semibold mb-4 text-yellow-700">Leave Feedback</h2>
+  
+  <form
+    onSubmit={async (e) => {
+      e.preventDefault();
+
+      const form = e.target as HTMLFormElement;
+      const formData = new FormData(form);
+      const name = formData.get("name");
+      const rating = formData.get("rating");
+      const message = formData.get("message");
+
+      try {
+        const res = await fetch("http://localhost:5000/api/feedback", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+         body: JSON.stringify({
+  productId: product?._id,
+  sellerId: product?.sellerId, // <-- Add this
+  name,
+  email: "", // optional if you don’t collect it
+  message,
+}),
+
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          setMessage("Thanks for your feedback!");
+          form.reset(); // clear form
+        } else {
+          setMessage(data.message || "Failed to submit feedback.");
+        }
+      } catch (err: any) {
+        setMessage("Server error while submitting feedback.");
+      }
+    }}
+    className="space-y-4"
+  >
+    <div className="grid sm:grid-cols-2 gap-4">
+      <input
+        name="name"
+        type="text"
+        required
+        placeholder="Your Name"
+        className="p-2 border rounded w-full"
+      />
+      <select name="rating" required className="p-2 border rounded w-full">
+        <option value="">Rate the Product</option>
+        <option value="5">⭐⭐⭐⭐⭐ (Excellent)</option>
+        <option value="4">⭐⭐⭐⭐ (Good)</option>
+        <option value="3">⭐⭐⭐ (Average)</option>
+        <option value="2">⭐⭐ (Poor)</option>
+        <option value="1">⭐ (Very Bad)</option>
+      </select>
+    </div>
+
+    <textarea
+      name="message"
+      required
+      placeholder="Write your feedback here..."
+      className="p-2 border rounded w-full min-h-[100px]"
+    ></textarea>
+
+    <Button type="submit" className="bg-yellow-600 text-white hover:bg-yellow-700">
+      Submit Feedback
+    </Button>
+  </form>
+</div>
+
         </div>
       </div>
     </div>
