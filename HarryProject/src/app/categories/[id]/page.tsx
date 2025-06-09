@@ -17,16 +17,16 @@ export default function CategoryDetails() {
   }
 
   const handleBack = () => {
-    router.push("/categories") // Back to the main categories page
+    router.push("/categories")
   }
 
   const handleSubcategoryClick = (subcategory: string) => {
-    router.push(`/categories/${id}/sell?subcategory=${subcategory}`) // Navigate to the product form
+    router.push(`/categories/${id}/sell?subcategory=${subcategory}`)
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-100 to-white">
-      <Navbar/>
+      <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <motion.h1
           className="text-4xl font-bold text-center text-yellow-800 mb-12"
@@ -37,7 +37,6 @@ export default function CategoryDetails() {
           {category.name}
         </motion.h1>
 
-        {/* Show Subcategories */}
         {subcategoryList.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {subcategoryList.map((sub, index) => (
@@ -48,16 +47,18 @@ export default function CategoryDetails() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <div
-                  onClick={() => handleSubcategoryClick(sub)}
+                  onClick={() => handleSubcategoryClick(sub.name)}
                   className="cursor-pointer bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
                 >
                   <img
-                    src={`/images/${sub}.jpg`} // Assuming images exist
-                    alt={sub}
+                    src={sub.image}
+                    alt={sub.name}
                     className="w-full h-48 object-cover"
                   />
                   <div className="p-4">
-                    <h2 className="text-xl font-semibold text-yellow-800">{sub}</h2>
+                    <h2 className="text-xl font-semibold text-yellow-800">
+                      {sub.name}
+                    </h2>
                   </div>
                 </div>
               </motion.div>
@@ -69,7 +70,6 @@ export default function CategoryDetails() {
           </div>
         )}
 
-        {/* Back to Category Button */}
         <div className="mt-10 text-center">
           <button
             onClick={handleBack}

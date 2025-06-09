@@ -225,7 +225,7 @@ export default function SignUpForm() {
                     value={formData.name}
                     onChange={handleChange}
                     onBlur={() => handleBlur("name")}
-                    placeholder="John Doe"
+                    placeholder="Enter Your Name"
                     className={cn(
                       "pl-4 h-12 transition-all duration-200",
                       touched.name && (nameValidation.isValid ? "border-green-500" : "border-red-500"),
@@ -253,7 +253,7 @@ export default function SignUpForm() {
                     value={formData.email}
                     onChange={handleChange}
                     onBlur={() => handleBlur("email")}
-                    placeholder="johndoe.example.com"
+                    placeholder="Enter Your Email"
                     className={cn(
                       "pl-4 h-12 transition-all duration-200",
                       touched.email && (emailValidation.isValid ? "border-green-500" : "border-red-500"),
@@ -281,7 +281,7 @@ export default function SignUpForm() {
                     value={formData.mobile}
                     onChange={handleChange}
                     onBlur={() => handleBlur("mobile")}
-                    placeholder="+1 (555) 000-0000"
+                    placeholder="Enter Your Mobile Number"
                     className={cn(
                       "pl-4 h-12 transition-all duration-200",
                       touched.mobile && (mobileValidation.isValid ? "border-green-500" : "border-red-500"),
@@ -309,6 +309,7 @@ export default function SignUpForm() {
                     type={showPassword ? "text" : "password"}
                     value={formData.password}
                     onChange={handleChange}
+                    placeholder="Enter Password"
                     onBlur={() => handleBlur("password")}
                     className={cn(
                       "pl-4 h-12 transition-all duration-200",
@@ -345,6 +346,7 @@ export default function SignUpForm() {
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     onBlur={() => handleBlur("confirmPassword")}
+                    placeholder="Enter Confirm Password"
                     className={cn(
                       "pl-4 h-12 transition-all duration-200",
                       touched.confirmPassword &&

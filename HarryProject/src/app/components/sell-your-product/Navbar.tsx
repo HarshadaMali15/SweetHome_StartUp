@@ -44,18 +44,20 @@ export default function Navbar() {
                     <Link href="/seller/profile" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
                       Profile
                     </Link>
-                    <Link href="/seller/dashboard" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
-                      My Dashboard
-                    </Link>
                     <Link href="/seller/product" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
                       Product
                     </Link>
+                    <Link href="/seller/orders" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                      My Orders
+                    </Link>
+                    <Link href="/seller/feedbacks" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                      Product Feedback
+                    </Link>
+                   
                     {/* <Link href="/seller/order" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
                       Order Tracking
                     </Link> */}
-                     <Link href="/seller/orders" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
-                      My Orders
-                    </Link>
+                     
                     <button
                       onClick={handleLogout}
                       className="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100"

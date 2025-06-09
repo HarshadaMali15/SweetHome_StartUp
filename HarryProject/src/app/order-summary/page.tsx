@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-
+import { useRouter } from "next/navigation"; // ✅ Fixed Import
 interface Order {
   _id: string;
   items: {
@@ -34,7 +34,7 @@ export default function OrderSummaryPage() {
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
-
+const router = useRouter();
   useEffect(() => {
     const fetchOrder = async () => {
       try {
@@ -55,7 +55,9 @@ export default function OrderSummaryPage() {
 
     fetchOrder();
   }, [orderId]);
-
+  const handleBack = () => {
+    router.push("/shop") // Back to the main categories page
+  }
   if (loading) return <p>Loading...</p>;
   if (!order) return <p>Order not found.</p>;
 
@@ -70,6 +72,14 @@ export default function OrderSummaryPage() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-3xl">
+      <div className="flex items-center justify-between mb-6">
+      <button
+            onClick={handleBack}
+            className="px-6 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700"
+          >
+            ← Back to Homepage
+          </button>
+          </div>
       <h1 className="text-2xl font-bold mb-4">Order Summary</h1>
 
       <div className="border p-4 rounded mb-6">

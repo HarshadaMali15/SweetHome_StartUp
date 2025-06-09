@@ -56,7 +56,7 @@ export default function ProductsPage() {
                         {products.map(product => (
                             <tr key={product._id} className="border-t">
                                 <td className="py-2 px-4">{product.name}</td>
-                                <td className="py-2 px-4">₹{product.price}</td>
+                                <td className="py-2 px-4">₹{product.discountPrice}</td>
                                 <td className="py-2 px-4">{product.category}</td>
                                 <td className="py-2 px-4">{product.sellerId?.name}</td>
                                 <td className="py-2 px-4">

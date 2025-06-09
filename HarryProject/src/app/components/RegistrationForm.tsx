@@ -22,14 +22,34 @@ export default function RegistrationForm({ onClose, onSwitch }: { onClose: () =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const validateForm = () => {
+    const { name, mobile, email, password, confirmPassword } = formData;
+
+    const nameRegex = /^[A-Za-z\s]{2,}$/;
+    if (!nameRegex.test(name)) return "Name must contain only letters and spaces (min 2 characters)";
+
+    const mobileRegex = /^[6-9]\d{9}$/;
+    if (!mobileRegex.test(mobile)) return "Mobile number must be 10 digits starting with 6-9";
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) return "Invalid email address";
+
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    if (!passwordRegex.test(password)) return "Password must be at least 6 characters and include a letter, number, and special character";
+
+    if (password !== confirmPassword) return "Passwords do not match";
+
+    return null;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setSuccess("");
 
-    // Check if passwords match
-    if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
+    const validationError = validateForm();
+    if (validationError) {
+      setError(validationError);
       return;
     }
 
@@ -44,7 +64,7 @@ export default function RegistrationForm({ onClose, onSwitch }: { onClose: () =>
       if (!res.ok) throw new Error(data.message);
 
       setSuccess("Registration successful! Please log in.");
-      setTimeout(() => onSwitch(), 2000); // Redirect to login form
+      setTimeout(() => onSwitch(), 2000);
     } catch (error: any) {
       setError(error.message);
     }
@@ -52,10 +72,9 @@ export default function RegistrationForm({ onClose, onSwitch }: { onClose: () =>
 
   const handleClose = () => {
     setIsOpen(false);
-    onClose(); // Notify Navbar
+    onClose();
   };
 
-  // If the form is closed, render nothing
   if (!isOpen) return null;
 
   return (
@@ -64,7 +83,6 @@ export default function RegistrationForm({ onClose, onSwitch }: { onClose: () =>
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-[9999]"
-
     >
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
@@ -72,7 +90,6 @@ export default function RegistrationForm({ onClose, onSwitch }: { onClose: () =>
         exit={{ scale: 0.9, opacity: 0 }}
         className="bg-white rounded-lg p-8 shadow-xl max-w-md w-full relative"
       >
-        {/* Close Button */}
         <button onClick={handleClose} className="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
           <X size={24} />
         </button>
@@ -150,8 +167,8 @@ export default function RegistrationForm({ onClose, onSwitch }: { onClose: () =>
           <p className="text-center text-gray-600">
             Already have an account?{" "}
             <button onClick={onSwitch} className="text-yellow-600 hover:text-yellow-700 transition-colors">
-            Sign In
-          </button>
+              Sign In
+            </button>
           </p>
         </form>
       </motion.div>

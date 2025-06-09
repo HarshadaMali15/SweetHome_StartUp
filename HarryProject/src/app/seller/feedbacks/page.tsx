@@ -28,7 +28,7 @@ export default function SellerFeedbacksPage() {
   useEffect(() => {
     const fetchFeedbacks = async () => {
       try {
-        const res = await fetch("/api/feedbacks/seller", {
+        const res = await fetch("http://localhost:5000/api/feedback/seller", {
           credentials: "include",
         });
 
@@ -53,6 +53,13 @@ export default function SellerFeedbacksPage() {
 
   return (
     <div className="p-6 space-y-4">
+      {/* Back Button */}
+      <button
+        className="mb-4 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-all"
+        onClick={() => router.push("/categories")}
+      >
+        ← Back to Categories
+      </button>
       <h1 className="text-2xl font-bold">Your Product Feedbacks</h1>
 
       {feedbacks.length === 0 ? (

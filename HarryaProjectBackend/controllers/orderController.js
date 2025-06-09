@@ -2,6 +2,11 @@ import Order from "../models/Order.js";
 import Product from "../models/Product.js";
 
 
+function generateTrackingId() {
+  const prefix = "TRK";
+  const random = Math.floor(100000 + Math.random() * 900000); // generates 6-digit number
+  return `${prefix}-${random}`;
+}
 export const createOrder = async (req, res) => {
     const { items, paymentMethod, address } = req.body;
     try {
@@ -21,9 +26,18 @@ export const createOrder = async (req, res) => {
           return res.status(400).json({ message: "Seller information not available for one or more products" });
         }
   
+         // ✅ Check stock
+      if (product.stock < item.quantity) {
+        return res.status(400).json({ message: `Not enough stock for ${product.name}` });
+      }
+
         const price = product.discountPrice || product.price;
         const lineTotal = price * item.quantity;
-  
+        
+        // ✅ Deduct stock
+      product.stock -= item.quantity;
+      await product.save();
+        
         orderItems.push({
           product: product._id,
           quantity: item.quantity,
@@ -42,7 +56,7 @@ export const createOrder = async (req, res) => {
       }
   
       const deliveryEstimation = "3-5 business days";
-      const trackingInfo = "TRACK123456";
+      const trackingInfo = generateTrackingId();
   
       const order = await Order.create({
         user: req.user._id,
@@ -50,6 +64,7 @@ export const createOrder = async (req, res) => {
         items: orderItems,
         paymentMethod,
         address,
+        
         deliveryEstimation,
         trackingInfo,
         finalAmount, // ✅ Save this
@@ -69,7 +84,7 @@ export const getUserOrders = async (req, res) => {
     const orders = await Order.find({ user: req.user._id })
       .populate("items.product")
       .populate("seller", "name email")
-      .populate("user", "name"); // Populate seller details if needed
+      .populate("user", "name mobile"); // Populate seller details if needed
     return res.status(200).json({ orders });
   } catch (error) {
     console.error(error);
@@ -91,7 +106,8 @@ export const getSellerOrders = async (req, res) => {
       const orders = await Order.find({ seller: sellerId })
         .populate("items.product")
         .populate("seller", "name email")
-        .populate("user", "name");
+        .populate("user", "name mobile"); // ✅ Add mobile here
+        
       return res.status(200).json({ orders });
     } catch (error) {
       console.error(error);

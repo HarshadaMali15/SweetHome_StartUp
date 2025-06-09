@@ -190,7 +190,7 @@ export default function ProductDetailPage() {
               <span className="text-3xl font-bold">
                 ₹{product.discountPrice ? product.discountPrice.toFixed(2) : product.price.toFixed(2)}
               </span>
-              {product.discountPrice && (
+              {product.price && (
                 <>
                   <span className="text-xl line-through text-muted-foreground">
                     ₹{product.price.toFixed(2)}
@@ -263,9 +263,9 @@ export default function ProductDetailPage() {
               Buy Now
             </Button>
 
-            <Button variant="ghost" size="icon" className="hidden sm:flex">
+            {/* <Button variant="ghost" size="icon" className="hidden sm:flex">
               <Heart className="h-5 w-5" />
-            </Button>
+            </Button> */}
           </div>
 
           <Separator />

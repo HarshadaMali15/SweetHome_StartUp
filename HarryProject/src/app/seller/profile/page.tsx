@@ -43,7 +43,7 @@ const SellerProfile = () => {
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-white py-10 px-6">
       {/* Back Button */}
       <button
-        className="mb-4 px-4 py-2 bg-orange-200 text-orange-700 rounded-lg shadow hover:bg-orange-200 transition-all"
+        className="mb-4 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-all"
         onClick={() => router.push("/categories")}
       >
         ← Back to Categories
@@ -64,20 +64,20 @@ const SellerProfile = () => {
           <p><strong>Name:</strong> {seller.name}</p>
           <p><strong>Email:</strong> {seller.email}</p>
           <p><strong>Mobile:</strong> {seller.mobile}</p>
-          <p><strong>Address:</strong> {seller.address || "N/A"}</p>
-          <p><strong>Shop Name:</strong> {seller.shopName || "N/A"}</p>
+          {/* <p><strong>Address:</strong> {seller.address || "N/A"}</p>
+          <p><strong>Shop Name:</strong> {seller.shopName || "N/A"}</p> */}
 
-          <motion.button
+          {/* <motion.button
             className="mt-4 px-4 py-2 bg-yellow-600 text-white rounded-lg shadow hover:bg-yellow-700 transition-all"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             Edit Profile
-          </motion.button>
+          </motion.button> */}
         </div>
 
         {/* Bank Account Details */}
-        <div className="bg-gray-100 p-6 rounded-lg shadow-md">
+        {/* <div className="bg-gray-100 p-6 rounded-lg shadow-md">
           <h3 className="text-xl font-semibold text-gray-700 mb-3">Bank Account Details</h3>
           <p><strong>Account Number:</strong> {seller.accountNumber || "N/A"}</p>
           <p><strong>IFSC Code:</strong> {seller.ifscCode || "N/A"}</p>
@@ -89,7 +89,7 @@ const SellerProfile = () => {
           >
             Update Bank Details
           </motion.button>
-        </div>
+        </div> */}
       </motion.div>
     </div>
   );

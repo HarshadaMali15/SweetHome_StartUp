@@ -48,14 +48,20 @@ export default function CheckoutPage() {
   }, [productId]);
 
   // Calculate final amount: subtotal + tax + service fee
+  // const calculateFinalAmount = () => {
+  //   if (!product) return 0;
+  //   const unitPrice = product.discountPrice || product.price;
+  //   const subtotal = unitPrice * quantity;
+  //   const tax = subtotal * 0.05; // 5% tax
+  //   const serviceFee = 50; // fixed service fee
+  //   return subtotal + tax + serviceFee;
+  // };
   const calculateFinalAmount = () => {
-    if (!product) return 0;
-    const unitPrice = product.discountPrice || product.price;
-    const subtotal = unitPrice * quantity;
-    const tax = subtotal * 0.05; // 5% tax
-    const serviceFee = 50; // fixed service fee
-    return subtotal + tax + serviceFee;
-  };
+  if (!product) return 0;
+  const unitPrice = product.discountPrice || product.price;
+  return unitPrice * quantity;
+};
+
 
   const finalAmount = calculateFinalAmount();
 
@@ -142,8 +148,8 @@ export default function CheckoutPage() {
 
   const unitPrice = product.discountPrice || product.price;
   const subtotal = unitPrice * quantity;
-  const tax = subtotal * 0.05;
-  const serviceFee = 50;
+  // const tax = subtotal * 0.05;
+  // const serviceFee = 50;
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-2xl">
@@ -157,8 +163,8 @@ export default function CheckoutPage() {
         <p>
           Price: ₹{unitPrice.toFixed(2)} x {quantity} = ₹{subtotal.toFixed(2)}
         </p>
-        <p>Tax (5%): ₹{tax.toFixed(2)}</p>
-        <p>Service Fee: ₹{serviceFee.toFixed(2)}</p>
+        {/* <p>Tax (5%): ₹{tax.toFixed(2)}</p> */}
+        {/* <p>Service Fee: ₹{serviceFee.toFixed(2)}</p> */}
         <hr className="my-2" />
         <p className="font-bold">
           Final Amount: ₹{finalAmount.toFixed(2)}
@@ -177,7 +183,7 @@ export default function CheckoutPage() {
             placeholder="Enter your shipping address"
           />
         </div>
-        <div>
+        {/* <div>
           <label className="block font-medium mb-1">Payment Method</label>
           <select
             value={paymentMethod}
@@ -187,7 +193,7 @@ export default function CheckoutPage() {
             <option value="COD">Cash on Delivery</option>
             <option value="Online Payment">Online Payment </option>
           </select>
-        </div>
+        </div> */}
 
         <Button type="submit" className="w-full" disabled={processingPayment}>
           {processingPayment ? "Processing Payment..." : "Confirm Order"}

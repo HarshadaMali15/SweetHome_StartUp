@@ -10,7 +10,7 @@ interface Product {
   _id: string;
   name: string;
   category: string;
-  price: number;
+  discountPrice: number;
   stock: number;
   sold: number;
 }
@@ -82,7 +82,7 @@ export default function ProductManagement() {
             onClick={handleBack}
             className="px-6 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700"
           >
-            Back to Categories
+            ← Back to Categories
           </button>
       </div>
 
@@ -137,7 +137,7 @@ export default function ProductManagement() {
               <tr key={product._id} className="border-b">
                 <td className="p-3">{product.name}</td>
                 <td className="p-3">{product.category}</td>
-                <td className="p-3">₹{product.price}</td>
+                <td className="p-3">₹{product.discountPrice}</td>
                 <td className="p-3">{product.stock}</td>
                 <td className="p-3">{product.sold}</td>
                 <td className="p-3 flex gap-2">

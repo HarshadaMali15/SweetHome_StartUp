@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-
+import Navbar from "../After_log_homepage/Navbar"
 interface ProductCardProps {
   id: string;
   name: string;
@@ -22,7 +22,7 @@ export default function ProductCard({
   subcategory,
   // rating // Add rating prop
 }: ProductCardProps) {
-  const discountPercentage = discountPrice ? Math.round(((price - discountPrice) / price) * 100) : 0;
+  const discountPercentage = discountPrice ? Math.round((( price - discountPrice ) / price) * 100) : 0;
 
   return (
 
@@ -71,10 +71,10 @@ export default function ProductCard({
         <div className="flex flex-col">
         <div className="flex items-baseline gap-1">
         <span className="text-xl font-bold">₹{(discountPrice || price).toFixed(0)}</span>
-          {discountPrice && <span className="text-sm line-through text-gray-500">₹{price.toFixed(0)}</span>}
+          {price && <span className="text-sm line-through text-gray-500">₹{price.toFixed(0)}</span>}
          
         </div>
-        {discountPrice && <div className="flex text-green-600 text-sm font-medium">{discountPercentage}% off</div>}
+        {price && <div className="flex text-green-600 text-sm font-medium">{discountPercentage}% off</div>}
         </div>
 
         {/* Color Options (static UI element to match design) */}

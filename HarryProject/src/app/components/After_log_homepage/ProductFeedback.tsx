@@ -64,7 +64,7 @@ export default function ProductFeedback() {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/feedbackRoutes", {
+      const res = await fetch("http://localhost:5000/api/feedback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include", // Ensures cookies/session are sent

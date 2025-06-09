@@ -191,9 +191,9 @@ export default function EditProductForm() {
                         >
                           <option value="">Select Subcategory</option>
                           {product.category &&
-                            subcategories[product.category]?.map((sub: string) => (
-                              <option key={sub} value={sub}>
-                                {sub}
+                            subcategories[product.category]?.map((sub) => (
+                              <option key={sub.name} value={sub.name}>
+                                {sub.name}
                               </option>
                             ))}
                         </select>
