@@ -1,10 +1,11 @@
+// order-summary/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation"; // ✅ Fixed Import
+import { useRouter } from "next/navigation";
+
 interface Order {
   _id: string;
   items: {
@@ -25,17 +26,23 @@ interface Order {
   trackingInfo: string;
   status: string;
   createdAt: string;
-  finalAmount?: number; // Mark optional to avoid type crash
+  finalAmount?: number;
 }
 
-export default function OrderSummaryPage() {
-  const searchParams = useSearchParams();
-  const orderId = searchParams.get("orderId");
+export default function OrderSummaryPage({
+  searchParams,
+}: {
+  searchParams: { orderId?: string };
+}) {
+  const orderId = searchParams?.orderId;
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
-const router = useRouter();
+  const router = useRouter();
+
   useEffect(() => {
+    if (!orderId) return;
+
     const fetchOrder = async () => {
       try {
         const res = await fetch("http://localhost:5000/api/orders/user", {
@@ -55,13 +62,12 @@ const router = useRouter();
 
     fetchOrder();
   }, [orderId]);
-  const handleBack = () => {
-    router.push("/shop") // Back to the main categories page
-  }
+
+  const handleBack = () => router.push("/shop");
+
   if (loading) return <p>Loading...</p>;
   if (!order) return <p>Order not found.</p>;
 
-  // Fallback total if finalAmount is missing
   const fallbackGrandTotal = order.items.reduce(
     (total, item) =>
       total + item.quantity * (item.product.discountPrice || item.product.price),
@@ -73,13 +79,13 @@ const router = useRouter();
   return (
     <div className="container mx-auto px-4 py-8 max-w-3xl">
       <div className="flex items-center justify-between mb-6">
-      <button
-            onClick={handleBack}
-            className="px-6 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700"
-          >
-            ← Back to Homepage
-          </button>
-          </div>
+        <button
+          onClick={handleBack}
+          className="px-6 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700"
+        >
+          ← Back to Homepage
+        </button>
+      </div>
       <h1 className="text-2xl font-bold mb-4">Order Summary</h1>
 
       <div className="border p-4 rounded mb-6">
@@ -113,7 +119,8 @@ const router = useRouter();
               <p>Quantity: {item.quantity}</p>
               <p>
                 Line Total: ₹
-                {(item.quantity *
+                {(
+                  item.quantity *
                   (item.product.discountPrice || item.product.price)
                 ).toFixed(2)}
               </p>
