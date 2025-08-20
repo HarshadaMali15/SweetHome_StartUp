@@ -1,16 +1,18 @@
 import multer from "multer";
 import path from "path";
-
-
 import fs from "fs";
-const uploadDir = path.join("D:/SweetHome/backend-sweethome/uploads");
+
+// Always resolve relative to project root
+const uploadDir = path.join(process.cwd(), "uploads");
+
+// Ensure the folder exists
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/"); // Save to the "uploads" folder
+    cb(null, uploadDir); // use the resolved path
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + "-" + file.originalname);
