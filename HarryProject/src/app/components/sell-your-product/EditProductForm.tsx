@@ -181,12 +181,12 @@ export default function EditProductForm({ productId }: { productId: string }) {
 
               <select name="subcategory" value={product.subcategory} onChange={handleChange} className="w-full px-4 py-2 border rounded-lg" required>
                 <option value="">Select Subcategory</option>
-                {product.category &&
-                  subcategories[product.category]?.map((sub: string) => (
-                    <option key={sub} value={sub}>
-                      {sub}
-                    </option>
-                  ))}
+              {subcategories[product.category]?.map((sub, index) => (
+                <option key={index} value={sub.name}>
+                  {sub.name}
+                </option>
+              ))}
+
               </select>
 
               <input
