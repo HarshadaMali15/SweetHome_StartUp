@@ -2,10 +2,8 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 
-// Always resolve relative to project root
-const uploadDir = path.join(process.cwd(), "uploads");
+const uploadDir = path.join("/tmp", "uploads");
 
-// Ensure the folder exists
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
