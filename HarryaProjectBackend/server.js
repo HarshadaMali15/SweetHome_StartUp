@@ -101,6 +101,10 @@ app.use("/api/orders", orderRoutes)
 app.use("/api/admin", adminRoutes)
 app.use("/api/feedback", feedbackRoutes)
 app.use("/uploads", express.static("uploads"))
+// Root route for testing
+app.get("/", (req, res) => {
+  res.send(" SweetHome backend is running! Use /api/... endpoints.");
+})
 
 // ✅ Export for Vercel
 export default app
