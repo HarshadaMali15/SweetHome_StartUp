@@ -1,6 +1,6 @@
 // routes/admin.js
 import express from "express";
-import Admin from "../models/admin.js";
+import Admin from "../models/Admin.js";
 import User from "../models/User.js";
 import Seller from "../models/Seller.js";
 import Product from "../models/Product.js";
