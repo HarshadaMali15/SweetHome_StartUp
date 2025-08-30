@@ -26,14 +26,21 @@ export default function EditProductForm({ productId }: { productId: string }) {
 
   const [loading, setLoading] = useState(true);
 
+<<<<<<< HEAD
   // ✅ Use your deployed backend URL
   const API_BASE = "https://sweet-home-start-up.vercel.app";
 
+=======
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
   // Fetch existing product details
   useEffect(() => {
     async function fetchProduct() {
       try {
+<<<<<<< HEAD
         const response = await fetch(`${API_BASE}/api/products/${productId}`, {
+=======
+        const response = await fetch(`http://localhost:5000/api/products/${productId}`, {
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
           method: "GET",
           credentials: "include",
         });
@@ -95,7 +102,11 @@ export default function EditProductForm({ productId }: { productId: string }) {
     });
 
     try {
+<<<<<<< HEAD
       const response = await fetch(`${API_BASE}/api/products/update/${productId}`, {
+=======
+      const response = await fetch(`http://localhost:5000/api/products/update/${productId}`, {
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
         method: "PUT",
         body: formData,
         credentials: "include",
@@ -184,12 +195,21 @@ export default function EditProductForm({ productId }: { productId: string }) {
 
               <select name="subcategory" value={product.subcategory} onChange={handleChange} className="w-full px-4 py-2 border rounded-lg" required>
                 <option value="">Select Subcategory</option>
+<<<<<<< HEAD
                 {product.category &&
                   subcategories[product.category]?.map((sub: string) => (
                     <option key={sub} value={sub}>
                       {sub}
                     </option>
                   ))}
+=======
+              {subcategories[product.category]?.map((sub, index) => (
+                <option key={index} value={sub.name}>
+                  {sub.name}
+                </option>
+              ))}
+
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
               </select>
 
               <input

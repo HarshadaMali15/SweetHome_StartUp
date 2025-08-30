@@ -40,7 +40,11 @@ export default function Navbar() {
           <Link href="/shop" className="text-gray-600 hover:text-gray-800">
             Shop
           </Link>
+<<<<<<< HEAD
           <Link href="/aboutt" className="text-gray-600 hover:text-gray-800">
+=======
+          <Link href="/afterabout" className="text-gray-600 hover:text-gray-800">
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
             About
           </Link>
           <Link href="/contact" className="text-gray-600 hover:text-gray-800">
@@ -67,11 +71,14 @@ export default function Navbar() {
 
                 {isDropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg  z-50">
+<<<<<<< HEAD
                   
                     <Link  href="" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
                       Profile
                     </Link>
                   
+=======
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
                    
                     <button
                       onClick={handleLogout}
@@ -93,9 +100,13 @@ export default function Navbar() {
             )}
           
            
+<<<<<<< HEAD
           <Link href="/wishlist" className="text-gray-600 hover:text-gray-800">
             <Heart className="h-5 w-5" />
           </Link>
+=======
+          
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
           <Link href="/cart" className="text-gray-600 hover:text-gray-800">
             <ShoppingCart className="h-5 w-5" />
           </Link>

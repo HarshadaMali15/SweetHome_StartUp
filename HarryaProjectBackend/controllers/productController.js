@@ -26,11 +26,33 @@ export const addProduct = async (req, res) => {
       return res.status(401).json({ message: "Not authenticated" });
     }
 
+<<<<<<< HEAD
     const newProduct = new Product({
       sellerId, // save seller id along with product data
       name, description, price, discountPrice, stock, unit, deliveryTime,
       category, subcategory, returnPolicy, paymentMode, sellerName,
       contact, location, images
+=======
+    // Set both sellerId and seller fields (if you want to keep both)
+    const newProduct = new Product({
+      sellerId,      // For Seller model reference
+      seller: sellerId,  // For User model reference (or you can remove this field if not needed)
+      name,
+      description,
+      price,
+      discountPrice,
+      stock,
+      unit,
+      deliveryTime,
+      category,
+      subcategory,
+      returnPolicy,
+      paymentMode,
+      sellerName,
+      contact,
+      location,
+      images
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
     });
 
     await newProduct.save();
@@ -41,6 +63,10 @@ export const addProduct = async (req, res) => {
   }
 };
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
 export const getMyProducts = async (req, res) => {
   try {
     // req.seller is set by the protect middleware

@@ -22,7 +22,11 @@ export default function Navbar() {
           </div>
 
           {/* Categories and Search */}
+<<<<<<< HEAD
           <div className="hidden md:flex items-center space-x-4 flex-1 max-w-2xl mx-8">
+=======
+          {/* <div className="hidden md:flex items-center space-x-4 flex-1 max-w-2xl mx-8">
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
             <div className="flex-1 relative">
               <input
                 type="text"
@@ -31,7 +35,11 @@ export default function Navbar() {
               />
               <Search className="absolute right-3 top-2.5 text-gray-400 w-5 h-5" />
             </div>
+<<<<<<< HEAD
           </div>
+=======
+          </div> */}
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
 
           {/* Navigation Links */}
           <div className="flex items-center space-x-8">
@@ -44,6 +52,13 @@ export default function Navbar() {
               <Link href="/log-in" className="font-medium">
                 LOG IN
               </Link>
+<<<<<<< HEAD
+=======
+              <Link href="/admin/login" className="font-medium">
+                Admin
+              </Link>
+              
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
             </div>
 
             {/* Sell Button */}
@@ -57,11 +72,15 @@ export default function Navbar() {
             </motion.button>
 
             {/* Icons */}
+<<<<<<< HEAD
             <div className="flex items-center space-x-4">
               <User className="w-6 h-6 text-gray-700" />
               <Bookmark className="w-6 h-6 text-gray-700" />
               <ShoppingCart className="w-6 h-6 text-gray-700" />
             </div>
+=======
+            
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
           </div>
         </div>
       </div>

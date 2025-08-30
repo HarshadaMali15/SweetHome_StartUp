@@ -19,17 +19,27 @@ export function SellerAuthProvider({ children }: { children: React.ReactNode }) 
   useEffect(() => {
     const checkAuth = async () => {
       try {
+<<<<<<< HEAD
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/api/seller/check-auth`,
           {
             credentials: "include", // Send cookies
           }
         );
+=======
+        const res = await fetch("http://localhost:5000/api/seller/check-auth", {
+          credentials: "include", // Ensure cookies are sent
+        });
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
 
         if (!res.ok) throw new Error("Not authenticated");
 
         const data = await res.json();
+<<<<<<< HEAD
         setSeller(data.seller ?? null); // set seller properly
+=======
+        setSeller(data.seller);  // Ensure setting correct seller data
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
       } catch (error) {
         setSeller(null);
       } finally {
@@ -41,6 +51,7 @@ export function SellerAuthProvider({ children }: { children: React.ReactNode }) 
   }, []);
 
   const logoutSeller = async () => {
+<<<<<<< HEAD
     try {
       await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/seller/logout`, {
         method: "POST",
@@ -51,6 +62,13 @@ export function SellerAuthProvider({ children }: { children: React.ReactNode }) 
     } finally {
       setSeller(null);
     }
+=======
+    await fetch("http://localhost:5000/api/seller/logout", {
+      method: "POST",
+      credentials: "include",
+    });
+    setSeller(null);
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
   };
 
   return (

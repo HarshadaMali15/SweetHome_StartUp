@@ -4,11 +4,19 @@ import { motion } from "framer-motion";
 import { X } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation"; 
+<<<<<<< HEAD
 import { useSellerAuth } from "@/context/authContextSeller";
 
 export default function LoginForm({ onClose, onSwitch }: { onClose: () => void, onSwitch: () => void }) {
   const router = useRouter();
   const { setSeller } = useSellerAuth();
+=======
+import { useSellerAuth } from "@/context/authContextSeller"; // Add this line
+
+export default function LoginForm({ onClose, onSwitch }: { onClose: () => void, onSwitch: () => void }) {
+  const router = useRouter();
+  const { setSeller } = useSellerAuth(); // Ensure this is used
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -23,6 +31,7 @@ export default function LoginForm({ onClose, onSwitch }: { onClose: () => void, 
     setSuccess("");
 
     try {
+<<<<<<< HEAD
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/seller/login`, // ✅ now uses env var
         {
@@ -44,6 +53,26 @@ export default function LoginForm({ onClose, onSwitch }: { onClose: () => void, 
       setTimeout(() => {
         router.push("/categories");
       }, 1000);
+=======
+      const res = await fetch("http://localhost:5000/api/seller/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+        credentials: "include",
+      });
+
+      const data = await res.json();
+      console.log("Login Response:", data); // Debugging
+
+      if (!res.ok) throw new Error(data.message);
+
+      setSeller(data.seller); // **Fix: Store logged-in user data**
+      setSuccess("Login successful!");
+
+      setTimeout(() => {
+        router.push("/categories"); 
+      }, 1000); 
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
     } catch (error: any) {
       setError(error.message);
     }
@@ -55,6 +84,10 @@ export default function LoginForm({ onClose, onSwitch }: { onClose: () => void, 
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-[9999]"
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
     >
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}

@@ -1,9 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
+<<<<<<< HEAD
 import { useRouter } from "next/navigation"; 
 import { motion } from "framer-motion";
 
+=======
+import { useRouter } from "next/navigation"; // Import useRouter
+import { motion } from "framer-motion";
+
+// Define TypeScript interface for user data
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
 interface User {
   name: string;
   email: string;
@@ -16,11 +23,16 @@ interface User {
 
 const UserProfile = () => {
   const [user, setUser] = useState<User | null>(null);
+<<<<<<< HEAD
   const router = useRouter();
+=======
+  const router = useRouter(); // Initialize router
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
 
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
+<<<<<<< HEAD
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/api/user/profile`,
           {
@@ -34,20 +46,43 @@ const UserProfile = () => {
 
         if (!response.ok) throw new Error("Failed to fetch user profile");
 
+=======
+        const response = await fetch("http://localhost:5000/api/user/profile", {
+          method: "GET",
+          credentials: "include", // To send cookies
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+  
+        if (!response.ok) throw new Error("Failed to fetch user profile");
+  
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
         const data: User = await response.json();
         setUser(data);
       } catch (error) {
         console.error("Error fetching user profile:", error);
       }
     };
+<<<<<<< HEAD
 
     fetchUserProfile();
   }, []);
 
+=======
+  
+    fetchUserProfile();
+  }, []);
+  
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
   if (!user) return <p className="text-center text-gray-500">Loading...</p>;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-white py-10 px-6">
+<<<<<<< HEAD
+=======
+      {/* Back Button */}
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
       <button
         className="mb-4 px-4 py-2 bg-orange-200 text-orange-700 rounded-lg shadow hover:bg-orange-200 transition-all"
         onClick={() => router.push("/categories")}
@@ -55,6 +90,10 @@ const UserProfile = () => {
         ← Back to Categories
       </button>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
       <motion.div
         className="max-w-3xl mx-auto bg-white p-6 rounded-2xl shadow-lg"
         initial={{ opacity: 0, y: 50 }}

@@ -22,7 +22,13 @@
     "next": "15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+<<<<<<< HEAD
     "sonner": "^1.7.4",
+=======
+    "react-toastify": "^11.0.5",
+    "sonner": "^1.7.4",
+    "swiper": "^11.2.6",
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^11.1.0"

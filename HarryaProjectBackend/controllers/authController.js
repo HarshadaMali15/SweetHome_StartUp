@@ -5,7 +5,11 @@ const generateToken = (userId) => {
   return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "7d" })
 }
 
+<<<<<<< HEAD
 // Register User
+=======
+
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
 export const registerUser = async (req, res) => {
   const { name, email, mobile, password } = req.body
   try {
@@ -22,8 +26,12 @@ export const registerUser = async (req, res) => {
 // authController.js
 export const loginUser = async (req, res) => {
   try {
+<<<<<<< HEAD
     const { email, password } = req.body; // Extract email and password from request body
 
+=======
+    const { email, password } = req.body; 
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
     const user = await User.findOne({ email });
     if (!user || !(await user.comparePassword(password))) {
       return res.status(401).json({ message: "Invalid email or password" });
@@ -73,6 +81,7 @@ export const logoutUser = (req, res) => {
 };
 
 
+<<<<<<< HEAD
 // export const getUserProfile = async (req, res) => {
 //   try {
 //     const user = await User.findById(req.user._id).select("-password");
@@ -84,3 +93,7 @@ export const logoutUser = (req, res) => {
 //     res.status(500).json({ message: "Server error" });
 //   }
 // };
+=======
+
+ 
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f

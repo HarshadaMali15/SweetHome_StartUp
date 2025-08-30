@@ -80,11 +80,20 @@ export default function Shop() {
 
                       {subcategories[category.id]?.map((sub) => (
                         <Link
+<<<<<<< HEAD
                           key={sub}
                           href={`/shop/${encodeURIComponent(category.id.toLowerCase())}/${encodeURIComponent(sub.toLowerCase().replace(/\s+/g, "-"))}`}
                           className="block px-6 py-2 hover:bg-primary hover:text-white transition-colors text-sm border-t border-gray-100 first:border-t-0"
                         >
                           {sub}
+=======
+                          key={sub.name}
+                          href={`/shop/${encodeURIComponent(category.id.toLowerCase())}/${encodeURIComponent(sub.name.toLowerCase().replace(/\s+/g, "-")
+                            .replace(/\s+/g, "-"))}`}
+                          className="block px-6 py-2 hover:bg-primary hover:text-white transition-colors text-sm border-t border-gray-100 first:border-t-0"
+                        >
+                          {sub.name}
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
                         </Link>
                       ))}
                     </div>

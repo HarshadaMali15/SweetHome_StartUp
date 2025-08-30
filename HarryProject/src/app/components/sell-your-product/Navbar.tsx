@@ -44,6 +44,7 @@ export default function Navbar() {
                     <Link href="/seller/profile" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
                       Profile
                     </Link>
+<<<<<<< HEAD
                     <Link href="/seller/dashboard" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
                       My Dashboard
                     </Link>
@@ -56,6 +57,22 @@ export default function Navbar() {
                      <Link href="/seller/payment" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
                       Payment
                     </Link>
+=======
+                    <Link href="/seller/product" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                      Product
+                    </Link>
+                    <Link href="/seller/orders" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                      My Orders
+                    </Link>
+                    <Link href="/seller/feedbacks" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                      Product Feedback
+                    </Link>
+                   
+                    {/* <Link href="/seller/order" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                      Order Tracking
+                    </Link> */}
+                     
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
                     <button
                       onClick={handleLogout}
                       className="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100"

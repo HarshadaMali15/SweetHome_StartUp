@@ -2,7 +2,11 @@
   "name": "backend-sweet-home",
   "version": "1.0.0",
   "description": "",
+<<<<<<< HEAD
   "main": "index.js",
+=======
+  "main": "server.js",
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js"

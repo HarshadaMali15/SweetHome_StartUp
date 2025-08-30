@@ -8,6 +8,11 @@ import { useRouter } from "next/navigation";
 import Navbar from "./Homepage/Navbar"
 import { useAuth } from "@/context/auth-context"
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
 interface ValidationState {
   isValid: boolean
   message: string
@@ -19,6 +24,10 @@ export default function LoginForm() {
     email: "",
     password: "",
   })
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
 
   const [showPassword, setShowPassword] = useState(false)
   const [touched, setTouched] = useState<Record<string, boolean>>({})
@@ -31,6 +40,12 @@ export default function LoginForm() {
     if (email.startsWith(".") || email.endsWith(".")) {
       return { isValid: false, message: "Invalid email format" }
     }
+<<<<<<< HEAD
+=======
+    // if (!/^[a-zA-Z0-9._-]+[a-zA-Z0-9]$/.test(email)) {
+    //   return { isValid: false, message: "Email contains invalid characters" }
+    // }
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
     return { isValid: true, message: "Valid email format" }
   }
 
@@ -45,11 +60,16 @@ export default function LoginForm() {
   // Get validation states
   const emailValidation = validateEmail(formData.email)
   const passwordValidation = validatePassword(formData.password)
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+<<<<<<< HEAD
     setTouched({ email: true, password: true });
 
     try {
@@ -71,10 +91,35 @@ export default function LoginForm() {
 
       login(data.user);
       router.push("/"); // redirect to home (or dashboard) after login
+=======
+  
+    setTouched({ email: true, password: true });
+  
+    try {
+        const response = await fetch(`http://localhost:5000/api/auth/login`, {
+        method: "POST",
+        credentials: 'include',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+  
+      const data = await response.json();
+  
+      if (!response.ok) {
+        throw new Error(data.message || "Login failed");
+      }
+  
+      
+      login(data.user);
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
     } catch (error) {
       alert((error as Error).message);
     }
   };
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -93,9 +138,13 @@ export default function LoginForm() {
       <motion.p
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
+<<<<<<< HEAD
         className={`text-sm mt-1 flex items-center gap-1 ${
           validation.isValid ? "text-green-500" : "text-red-500"
         }`}
+=======
+        className={`text-sm mt-1 flex items-center gap-1 ${validation.isValid ? "text-green-500" : "text-red-500"}`}
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
       >
         {validation.isValid ? <CheckCircle2 size={14} /> : <XCircle size={14} />}
         {validation.message}
@@ -104,11 +153,20 @@ export default function LoginForm() {
   }
 
   return (
+<<<<<<< HEAD
     <div className=" w-full  bg-gradient-to-br from-yellow-100 to-white flex items-center justify-center p-4 relative overflow-hidden pt-20">
       <div className="fixed top-0 w-full z-50">
         <Navbar />
       </div>
 
+=======
+   <div className=" w-full  bg-gradient-to-br from-yellow-100 to-white flex items-center justify-center p-4 relative overflow-hidden pt-20">
+      
+      <div className="fixed top-0 w-full z-50">
+        <Navbar />
+      </div>
+     
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
       {/* Decorative Elements */}
       <div className="absolute top-0 left-0 w-64 h-64 bg-yellow-200 rounded-full filter blur-3xl opacity-50 -translate-x-1/2 -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-64 h-64 bg-yellow-300 rounded-full filter blur-3xl opacity-50 translate-x-1/2 translate-y-1/2" />
@@ -236,3 +294,7 @@ export default function LoginForm() {
     </div>
   )
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
