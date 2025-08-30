@@ -1,35 +1,33 @@
-
 import express from "express";
-<<<<<<< HEAD
-import {getSellerProfile, registerSeller, loginSeller, logoutSeller, checkAuth } from "../controllers/sellerController.js";
-import { protect } from "../middlewares/authMiddleware.js"; // Add authentication middleware 
-=======
-import { createOrder, getUserOrders, getSellerOrders } from "../controllers/orderController.js";
-import {getSellerProfile, registerSeller, loginSeller, logoutSeller, checkAuth } from "../controllers/sellerController.js";
-import { protect } from "../middlewares/authMiddleware.js"; 
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
+import {
+  getSellerProfile,
+  registerSeller,
+  loginSeller,
+  logoutSeller,
+  checkAuth,
+} from "../controllers/sellerController.js";
+import {
+  createOrder,
+  getUserOrders,
+  getSellerOrders,
+} from "../controllers/orderController.js";
+import { protect } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
+
+// Seller auth routes
 router.post("/register", registerSeller);
 router.post("/login", loginSeller);
-<<<<<<< HEAD
 router.post("/logout", logoutSeller);
 router.get("/check-auth", checkAuth);
 router.get("/profile", protect, getSellerProfile);
 
-=======
-
-router.post("/logout", logoutSeller);
-router.get("/check-auth", checkAuth);
-router.get("/profile", protect, getSellerProfile);
+// Orders (seller side)
 router.get("/seller", protect, getSellerOrders);
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
+
+// Protected test route
 router.get("/protected-route", checkAuth, (req, res) => {
   res.json({ message: "Access granted" });
-  
 });
 
 export default router;
-
-
-

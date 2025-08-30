@@ -1,33 +1,30 @@
 import multer from "multer";
-import path from "path";
-<<<<<<< HEAD
+import { v2 as cloudinary } from "cloudinary";
+import streamifier from "streamifier";
 
-
-import fs from "fs";
-const uploadDir = path.join("D:/SweetHome/backend-sweethome/uploads");
-=======
-import fs from "fs";
-
-const uploadDir = path.join("/tmp", "uploads");
-
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-<<<<<<< HEAD
-    cb(null, "uploads/"); // Save to the "uploads" folder
-=======
-    cb(null, uploadDir); // use the resolved path
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname);
-  },
+// Cloudinary config (env vars Vercel settings मध्ये add केलेत ना?)
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+// Multer setup (keep file in memory instead of disk)
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-export default upload;
+// Helper function → upload buffer to Cloudinary
+const uploadToCloudinary = (fileBuffer, folder) => {
+  return new Promise((resolve, reject) => {
+    const cld_upload_stream = cloudinary.uploader.upload_stream(
+      { folder: folder || "sweethome_uploads" },
+      (error, result) => {
+        if (result) resolve(result);
+        else reject(error);
+      }
+    );
+    streamifier.createReadStream(fileBuffer).pipe(cld_upload_stream);
+  });
+};
+
+export { upload, uploadToCloudinary };
