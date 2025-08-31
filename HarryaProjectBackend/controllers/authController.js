@@ -5,11 +5,7 @@ const generateToken = (userId) => {
   return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "7d" })
 }
 
-<<<<<<< HEAD
 // Register User
-=======
-
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
 export const registerUser = async (req, res) => {
   const { name, email, mobile, password } = req.body
   try {
@@ -23,27 +19,22 @@ export const registerUser = async (req, res) => {
   }
 }
 
-// authController.js
+// Login User
 export const loginUser = async (req, res) => {
   try {
-<<<<<<< HEAD
-    const { email, password } = req.body; // Extract email and password from request body
-
-=======
-    const { email, password } = req.body; 
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
-    const user = await User.findOne({ email });
+    const { email, password } = req.body
+    const user = await User.findOne({ email })
     if (!user || !(await user.comparePassword(password))) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid email or password" })
     }
 
     // Set HTTP-only cookie
-    res.cookie('token', generateToken(user._id), {
+    res.cookie("token", generateToken(user._id), {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
-    });
+    })
 
     res.json({
       message: "Login successful",
@@ -52,48 +43,43 @@ export const loginUser = async (req, res) => {
         name: user.name,
         email: user.email,
       },
-    });
+    })
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Server error" })
   }
-};
+}
 
-// Add this middleware
+// Middleware to protect routes
 export const authMiddleware = async (req, res, next) => {
   try {
-    const token = req.cookies.token;
+    const token = req.cookies.token
     if (!token) {
-      return res.status(401).json({ message: "Not authorized" });
+      return res.status(401).json({ message: "Not authorized" })
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = await User.findById(decoded.userId).select('-password');
-    next();
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    req.user = await User.findById(decoded.userId).select("-password")
+    next()
   } catch (error) {
-    res.status(401).json({ message: "Not authorized, invalid token" });
+    res.status(401).json({ message: "Not authorized, invalid token" })
   }
-};
+}
 
-// Add logout endpoint
+// Logout User
 export const logoutUser = (req, res) => {
-  res.clearCookie('token');
-  res.json({ message: "Logout successful" });
-};
+  res.clearCookie("token")
+  res.json({ message: "Logout successful" })
+}
 
+// Optional: Get user profile
+export const getUserProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).select("-password")
+    if (!user) return res.status(404).json({ message: "User not found" })
 
-<<<<<<< HEAD
-// export const getUserProfile = async (req, res) => {
-//   try {
-//     const user = await User.findById(req.user._id).select("-password");
-//     if (!user) return res.status(404).json({ message: "User not found" });
-
-//     res.status(200).json(user);
-//   } catch (error) {
-//     console.error("Error fetching user profile:", error);
-//     res.status(500).json({ message: "Server error" });
-//   }
-// };
-=======
-
- 
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
+    res.status(200).json(user)
+  } catch (error) {
+    console.error("Error fetching user profile:", error)
+    res.status(500).json({ message: "Server error" })
+  }
+}

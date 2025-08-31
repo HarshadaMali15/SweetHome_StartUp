@@ -4,22 +4,13 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Pencil, Trash } from "lucide-react";
-<<<<<<< HEAD
 import { useRouter } from "next/navigation";
 
-=======
-import { useRouter } from "next/navigation"; // ✅ Fixed Import
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
-// Product interface for TypeScript
 interface Product {
   _id: string;
   name: string;
   category: string;
-<<<<<<< HEAD
-  price: number;
-=======
-  discountPrice: number;
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
+  price: number;   // ✅ keep price (not discountPrice) for consistency
   stock: number;
   sold: number;
 }
@@ -29,43 +20,26 @@ export default function ProductManagement() {
   const [products, setProducts] = useState<Product[]>([]);
   const [search, setSearch] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-<<<<<<< HEAD
   const [message, setMessage] = useState<string>("");
 
-  // ✅ Use env variable for API URL
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const API_URL = process.env.NEXT_PUBLIC_API_URL; // ✅ for Vercel deploy
 
-  // Fetch products for the current seller
+  // Fetch products
   useEffect(() => {
     fetchProducts();
   }, []);
 
   const handleBack = () => {
-    router.push("/categories"); // Back to the main categories page
+    router.push("/categories");
   };
 
   const fetchProducts = async () => {
     try {
       const res = await fetch(`${API_URL}/api/products/mine`, {
         credentials: "include",
-=======
-  const [message, setMessage] = useState<string>(""); // State for success message
-  // Fetch products for the current seller using the new endpoint
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-  const handleBack = () => {
-    router.push("/categories") // Back to the main categories page
-  }
-  const fetchProducts = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/api/products/mine", {
-        credentials: "include", // Send cookies with the request
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
       });
       if (!res.ok) throw new Error(`Failed to fetch products: ${res.status}`);
       const data = await res.json();
-      console.log("Fetched products:", data);
       setProducts(data.products);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -74,46 +48,21 @@ export default function ProductManagement() {
 
   const deleteProduct = async (id: string) => {
     try {
-<<<<<<< HEAD
       const res = await fetch(`${API_URL}/api/products/mine/${id}`, {
-=======
-      const res = await fetch(`http://localhost:5000/api/products/mine/${id}`, {
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
         method: "DELETE",
         credentials: "include",
       });
       if (!res.ok) throw new Error("Failed to delete product");
-<<<<<<< HEAD
 
       setProducts(products.filter((product) => product._id !== id));
-
       setMessage("Product deleted successfully!");
 
-      setTimeout(() => {
-        setMessage("");
-      }, 3000);
-=======
-  
-      // Remove the deleted product from state
-      setProducts(products.filter(product => product._id !== id));
-
-      // Set success message
-      setMessage("Product deleted successfully!");
-
-      // Clear message after 3 seconds
-      setTimeout(() => {
-        setMessage("");
-      }, 3000);
- 
-      
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
+      setTimeout(() => setMessage(""), 3000);
     } catch (error) {
       console.error("Error deleting product:", error);
     }
   };
-<<<<<<< HEAD
 
-  // Filter products
   const filteredProducts = products.filter(
     (product) =>
       (selectedCategory === "All" || product.category === selectedCategory) &&
@@ -128,34 +77,10 @@ export default function ProductManagement() {
           onClick={handleBack}
           className="px-6 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700"
         >
-          Back to Categories
+          ← Back to Categories
         </button>
       </div>
 
-      {/* ✅ Success Message Display */}
-=======
-  
-
-  // Filter products based on search and category
-  const filteredProducts = products.filter(product =>
-    (selectedCategory === "All" || product.category === selectedCategory) &&
-    product.name.toLowerCase().includes(search.toLowerCase())
-  );
-
-  return (
-    <div className="p-6  items-center justify-center bg-gradient-to-br from-yellow-100 to-white pt-16 pb-16">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-semibold">Product Management</h1>
-        <button
-            onClick={handleBack}
-            className="px-6 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700"
-          >
-            ← Back to Categories
-          </button>
-      </div>
-
-      {/* Success Message Display */}
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
       {message && (
         <div className="text-center w-full bg-yellow-500 text-white py-2 rounded-md mb-4">
           {message}
@@ -164,7 +89,6 @@ export default function ProductManagement() {
 
       <div className="grid grid-cols-4 gap-4 bg-white p-6 shadow-md rounded-lg mb-6">
         <StatCard title="Total Products" value={products.length} />
-<<<<<<< HEAD
         <StatCard
           title="Total Stock"
           value={products.reduce((sum, p) => sum + p.stock, 0)}
@@ -177,11 +101,6 @@ export default function ProductManagement() {
           title="Categories"
           value={[...new Set(products.map((p) => p.category))].length}
         />
-=======
-        <StatCard title="Total Stock" value={products.reduce((sum, p) => sum + p.stock, 0)} />
-        <StatCard title="Total Sold" value={products.reduce((sum, p) => sum + p.sold, 0)} />
-        <StatCard title="Categories" value={[...new Set(products.map(p => p.category))].length} />
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
       </div>
 
       <div className="bg-white shadow-md rounded-lg p-6">
@@ -199,15 +118,10 @@ export default function ProductManagement() {
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
             <option value="All">All Categories</option>
-<<<<<<< HEAD
             {[...new Set(products.map((p) => p.category))].map((category) => (
               <option key={category} value={category}>
                 {category}
               </option>
-=======
-            {[...new Set(products.map(p => p.category))].map(category => (
-              <option key={category} value={category}>{category}</option>
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
             ))}
           </select>
         </div>
@@ -224,7 +138,6 @@ export default function ProductManagement() {
             </tr>
           </thead>
           <tbody>
-<<<<<<< HEAD
             {filteredProducts.map((product) => (
               <tr key={product._id} className="border-b">
                 <td className="p-3">{product.name}</td>
@@ -245,21 +158,6 @@ export default function ProductManagement() {
                     onClick={() => deleteProduct(product._id)}
                     className="bg-red-500 text-white px-2 py-1"
                   >
-=======
-            {filteredProducts.map(product => (
-              <tr key={product._id} className="border-b">
-                <td className="p-3">{product.name}</td>
-                <td className="p-3">{product.category}</td>
-                <td className="p-3">₹{product.discountPrice}</td>
-                <td className="p-3">{product.stock}</td>
-                <td className="p-3">{product.sold}</td>
-                <td className="p-3 flex gap-2">
-                  <Button className="bg-gray-200 text-gray-800 px-2 py-1"
-                   onClick={() => router.push(`/seller/edit-product/${product._id}`)}>
-                    <Pencil size={16} />
-                  </Button>
-                  <Button onClick={() => deleteProduct(product._id)} className="bg-red-500 text-white px-2 py-1">
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
                     <Trash size={16} />
                   </Button>
                 </td>
@@ -272,7 +170,6 @@ export default function ProductManagement() {
   );
 }
 
-// StatCard Component
 function StatCard({ title, value }: { title: string; value: string | number }) {
   return (
     <div className="p-4 bg-gray-100 rounded-lg">

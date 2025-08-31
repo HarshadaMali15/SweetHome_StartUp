@@ -1,13 +1,12 @@
-//Shop.tsx
-"use client"
+"use client";
 
-import { useState } from "react"
-import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Navbar from "./Navbar"
-import Link from "next/link"
-import { cn } from "@/lib/utils"
-import { categories, subcategories } from "../sell-your-product/categories"
+import { useState } from "react";
+import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Navbar from "./Navbar";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { categories, subcategories } from "../sell-your-product/categories";
 
 const slides = [
   {
@@ -25,32 +24,28 @@ const slides = [
     title: "EXCLUSIVE DEALS",
     subtitle: "Limited Time Offer",
   },
-]
-
-const pages = ["Shopping Cart", "Checkout", "My Account", "Track Order"]
+];
 
 export default function Shop() {
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const [expandedCategories, setExpandedCategories] = useState<string[]>([])
- 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length)
-  }
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
-  }
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
+  const prevSlide = () =>
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
   const toggleCategory = (categoryId: string) => {
-    setExpandedCategories((prev) => (prev.includes(categoryId) ? prev.filter((id) => id !== categoryId) : [...prev, categoryId]))
-  }
+    setExpandedCategories((prev) =>
+      prev.includes(categoryId)
+        ? prev.filter((id) => id !== categoryId)
+        : [...prev, categoryId]
+    );
+  };
 
   return (
     <div className="min-h-screen">
       <Navbar />
-      {/* Main Content */}
       <main>
-        {/* Categories Sidebar + Hero Section */}
         <div className="container mx-auto px-4 flex">
           {/* Sidebar */}
           <div className="w-64 flex-shrink-0 pr-6">
@@ -66,34 +61,32 @@ export default function Shop() {
                       <ChevronDown
                         className={cn(
                           "h-4 w-4 transition-transform duration-200",
-                          expandedCategories.includes(category.id) ? "rotate-180" : "",
+                          expandedCategories.includes(category.id) ? "rotate-180" : ""
                         )}
                       />
                     </div>
 
                     <div
-                        className={cn(
-                          "overflow-hidden transition-all duration-300 bg-gray-50",
-                          expandedCategories.includes(category.id) ? "max-h-[500px]" : "max-h-0",
-                        )}
-                      >
-
+                      className={cn(
+                        "overflow-hidden transition-all duration-300 bg-gray-50",
+                        expandedCategories.includes(category.id)
+                          ? "max-h-[500px]"
+                          : "max-h-0"
+                      )}
+                    >
                       {subcategories[category.id]?.map((sub) => (
                         <Link
-<<<<<<< HEAD
-                          key={sub}
-                          href={`/shop/${encodeURIComponent(category.id.toLowerCase())}/${encodeURIComponent(sub.toLowerCase().replace(/\s+/g, "-"))}`}
+                          key={typeof sub === "string" ? sub : sub.name}
+                          href={`/shop/${encodeURIComponent(
+                            category.id.toLowerCase()
+                          )}/${encodeURIComponent(
+                            (typeof sub === "string" ? sub : sub.name)
+                              .toLowerCase()
+                              .replace(/\s+/g, "-")
+                          )}`}
                           className="block px-6 py-2 hover:bg-primary hover:text-white transition-colors text-sm border-t border-gray-100 first:border-t-0"
                         >
-                          {sub}
-=======
-                          key={sub.name}
-                          href={`/shop/${encodeURIComponent(category.id.toLowerCase())}/${encodeURIComponent(sub.name.toLowerCase().replace(/\s+/g, "-")
-                            .replace(/\s+/g, "-"))}`}
-                          className="block px-6 py-2 hover:bg-primary hover:text-white transition-colors text-sm border-t border-gray-100 first:border-t-0"
-                        >
-                          {sub.name}
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
+                          {typeof sub === "string" ? sub : sub.name}
                         </Link>
                       ))}
                     </div>
@@ -109,8 +102,9 @@ export default function Shop() {
               {slides.map((slide, index) => (
                 <div
                   key={index}
-                  className={`absolute inset-0 transition-opacity duration-500 ${index === currentSlide ? "opacity-100" : "opacity-0"
-                    }`}
+                  className={`absolute inset-0 transition-opacity duration-500 ${
+                    index === currentSlide ? "opacity-100" : "opacity-0"
+                  }`}
                   style={{
                     backgroundImage: `url('${slide.image}')`,
                     backgroundSize: "cover",
@@ -147,5 +141,5 @@ export default function Shop() {
         </div>
       </main>
     </div>
-  )
+  );
 }

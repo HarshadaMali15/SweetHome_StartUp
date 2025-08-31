@@ -1,4 +1,4 @@
-//controllers/productController.js
+// controllers/productController.js
 import Product from "../models/Product.js";
 
 export const addProduct = async (req, res) => {
@@ -26,33 +26,11 @@ export const addProduct = async (req, res) => {
       return res.status(401).json({ message: "Not authenticated" });
     }
 
-<<<<<<< HEAD
     const newProduct = new Product({
       sellerId, // save seller id along with product data
       name, description, price, discountPrice, stock, unit, deliveryTime,
       category, subcategory, returnPolicy, paymentMode, sellerName,
       contact, location, images
-=======
-    // Set both sellerId and seller fields (if you want to keep both)
-    const newProduct = new Product({
-      sellerId,      // For Seller model reference
-      seller: sellerId,  // For User model reference (or you can remove this field if not needed)
-      name,
-      description,
-      price,
-      discountPrice,
-      stock,
-      unit,
-      deliveryTime,
-      category,
-      subcategory,
-      returnPolicy,
-      paymentMode,
-      sellerName,
-      contact,
-      location,
-      images
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
     });
 
     await newProduct.save();
@@ -63,10 +41,6 @@ export const addProduct = async (req, res) => {
   }
 };
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
 export const getMyProducts = async (req, res) => {
   try {
     // req.seller is set by the protect middleware
@@ -78,67 +52,55 @@ export const getMyProducts = async (req, res) => {
   }
 };
   
-  // productController.js
-  export const getProducts = async (req, res) => {
-    try {
-      let { category, subcategory } = req.query;
-      
-  
-      const query = {};
-      if (category) query.category = new RegExp(`^${category}$`, "i");  
-  
-      if (subcategory) {
-        // Convert hyphens to spaces for better matching
-        const normalizedSubcategory = subcategory.replace(/-/g, " ");
-        query.subcategory = new RegExp(`^${normalizedSubcategory}$`, "i");
-      }
-  
-      
-  
-      const products = await Product.find(query);
-      
-  
-      res.json({ products });
-    } catch (error) {
-     
-      res.status(500).json({ message: "Error fetching products" });
-    }
-  };
-  
-  
-  export const getProductById = async (req, res) => {
-    try {
-      const { productId } = req.params;
-      const product = await Product.findById(productId);
-      if (!product) {
-        return res.status(404).json({ message: "Product not found" });
-      }
-      res.json({ product });
-    } catch (error) {
-      
-      res.status(500).json({ message: "Error fetching product" });
-    }
-  };
-  
+export const getProducts = async (req, res) => {
+  try {
+    let { category, subcategory } = req.query;
+    const query = {};
 
+    if (category) query.category = new RegExp(`^${category}$`, "i");  
+
+    if (subcategory) {
+      // Convert hyphens to spaces for better matching
+      const normalizedSubcategory = subcategory.replace(/-/g, " ");
+      query.subcategory = new RegExp(`^${normalizedSubcategory}$`, "i");
+    }
+
+    const products = await Product.find(query);
+    res.json({ products });
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching products" });
+  }
+};
+  
+export const getProductById = async (req, res) => {
+  try {
+    const { productId } = req.params;
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    res.json({ product });
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching product" });
+  }
+};
 
 export const getProductsBySeller = async (req, res) => {
-    try {
-        const { sellerId } = req.params;
-        if (!sellerId) {
-            return res.status(400).json({ message: "Seller ID is required" });
-        }
-
-        const products = await Product.find({ sellerId: sellerId });
-
-        if (!products.length) {
-            return res.status(404).json({ message: "No products found for this seller" });
-        }
-
-        res.json({ products });
-    } catch (error) {
-        res.status(500).json({ message: "Error fetching seller products", error });
+  try {
+    const { sellerId } = req.params;
+    if (!sellerId) {
+      return res.status(400).json({ message: "Seller ID is required" });
     }
+
+    const products = await Product.find({ sellerId });
+    if (!products.length) {
+      return res.status(404).json({ message: "No products found for this seller" });
+    }
+
+    res.json({ products });
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching seller products", error });
+  }
 };
 
 export const deleteProduct = async (req, res) => {

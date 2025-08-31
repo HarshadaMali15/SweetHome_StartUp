@@ -10,11 +10,7 @@ export default function Promotions() {
           <div className="relative h-[400px] lg:h-full overflow-hidden rounded-lg group">
             <div className="absolute inset-0 bg-black">
               <Image
-<<<<<<< HEAD
-                src="/homepage/shop-now.jpeg" // Update with your image name from public folder
-=======
                 src="/homepage/shop-now.jpeg"
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
                 alt="Items on Sale"
                 fill
                 className="object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
@@ -24,13 +20,7 @@ export default function Promotions() {
             </div>
             <div className="relative h-full p-8 flex flex-col justify-center">
               <h2 className="text-4xl font-bold text-white mb-4">Items on SALE</h2>
-<<<<<<< HEAD
               <p className="text-xl text-white mb-6">Discounts up to 30%</p>
-=======
-              <p className="text-xl text-white mb-6">
-                Grab the best deals on handmade products crafted with love.
-              </p>
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
               <Link
                 href="/sign-up"
                 className="inline-block bg-white text-black px-6 py-2 rounded-md font-medium hover:bg-opacity-90 transition-colors w-fit"
@@ -46,11 +36,7 @@ export default function Promotions() {
             <div className="relative overflow-hidden rounded-lg bg-[#47B5FF] group">
               <div className="absolute inset-0">
                 <Image
-<<<<<<< HEAD
-                  src="/homepage/sale1.jpeg" 
-=======
                   src="/homepage/sale1.jpeg"
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
                   alt="Combo offers"
                   fill
                   className="object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
@@ -59,13 +45,7 @@ export default function Promotions() {
               </div>
               <div className="relative h-full p-8 flex flex-col justify-center">
                 <h2 className="text-3xl font-bold text-white mb-4">Combo offers</h2>
-<<<<<<< HEAD
                 <p className="text-xl text-white mb-6">Discounts up to 50%</p>
-=======
-                <p className="text-xl text-white mb-6">
-                  Explore exclusive bundles specially curated for festive gifting.
-                </p>
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
                 <Link
                   href="/sign-up"
                   className="inline-block bg-white text-black px-6 py-2 rounded-md font-medium hover:bg-opacity-90 transition-colors w-fit"
@@ -79,11 +59,7 @@ export default function Promotions() {
             <div className="relative overflow-hidden rounded-lg bg-[#06B6D4] group">
               <div className="absolute inset-0">
                 <Image
-<<<<<<< HEAD
-                  src="/homepage/discount.jpeg" 
-=======
                   src="/homepage/discount.jpeg"
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
                   alt="Discount Coupons"
                   fill
                   className="object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
@@ -92,13 +68,7 @@ export default function Promotions() {
               </div>
               <div className="relative h-full p-8 flex flex-col justify-center">
                 <h2 className="text-3xl font-bold text-white mb-4">Discount Coupons</h2>
-<<<<<<< HEAD
                 <p className="text-xl text-white mb-6">Discounts up to 40%</p>
-=======
-                <p className="text-xl text-white mb-6">
-                  Enjoy additional savings with exclusive coupons for your next purchase.
-                </p>
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
                 <Link
                   href="/sign-up"
                   className="inline-block bg-white text-black px-6 py-2 rounded-md font-medium hover:bg-opacity-90 transition-colors w-fit"
@@ -113,7 +83,3 @@ export default function Promotions() {
     </section>
   )
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f

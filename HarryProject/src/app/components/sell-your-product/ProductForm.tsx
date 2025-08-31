@@ -5,14 +5,8 @@ import { categories, subcategories } from "./categories";
 import { useRouter } from "next/navigation";
 
 export default function ProductForm() {
-<<<<<<< HEAD
   const router = useRouter();
 
-=======
-  // Remove temporary sellerId since backend will derive it from the auth token
-  // const sellerId = "SELLER_ID_FROM_AUTH";
-  const router = useRouter();
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
   const [product, setProduct] = useState({
     name: "",
     description: "",
@@ -28,29 +22,21 @@ export default function ProductForm() {
     sellerName: "Auto-filled",
     contact: "",
     location: "",
-<<<<<<< HEAD
     images: [] as File[],
-=======
-    images: [] as File[], // Now stores an array of files
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
   });
 
   // Handle text, select, and textarea inputs
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
-<<<<<<< HEAD
 
   const handleBack = () => {
     router.push("/categories");
   };
-=======
-  const handleBack = () => {
-    router.push("/categories") // Back to the main categories page
-  }
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
 
   // Handle file input change
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,11 +44,7 @@ export default function ProductForm() {
     if (files && files.length > 0) {
       setProduct((prev) => ({
         ...prev,
-<<<<<<< HEAD
         [name]: Array.from(files),
-=======
-        [name]: Array.from(files), // Convert FileList to an array
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
       }));
     }
   };
@@ -79,47 +61,29 @@ export default function ProductForm() {
       }
     });
 
-<<<<<<< HEAD
-=======
-    // Do not append sellerId from the client. The backend should extract it from the auth token.
-    // formData.append("sellerId", sellerId);
-
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
-    // Append each image file
+    // Append images
     product.images.forEach((file) => {
       formData.append("images", file);
     });
 
     try {
-<<<<<<< HEAD
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/products/add`,
         {
           method: "POST",
           body: formData,
-          credentials: "include",
+          credentials: "include", // auth cookies send hotil
         }
       );
-=======
-      const response = await fetch("http://localhost:5000/api/products/add", {
-        method: "POST",
-        body: formData,
-        credentials: "include", // Ensure cookies (auth token) are sent
-      });
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
 
       const data = await response.json();
       console.log("Response:", data);
 
       if (response.ok) {
-        alert("Product added successfully!");
-<<<<<<< HEAD
+        alert("✅ Product added successfully!");
         router.push("/seller-dashboard"); // redirect after success
-=======
-        router.push("/seller/product"); // ✅ redirect to another page
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
       } else {
-        alert(`Error: ${data.message}`);
+        alert(`❌ Error: ${data.message}`);
       }
     } catch (error) {
       console.error("Error submitting product:", error);
@@ -131,14 +95,8 @@ export default function ProductForm() {
     <div>
       <Navbar />
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-yellow-100 to-white pt-16 pb-16">
-<<<<<<< HEAD
         {/* Back to Category Button */}
         <div className="absolute pt-16 top-4 left-14">
-=======
-         {/* Back to Category Button */}
-         <div>
-         <div className="absolute pt-16 top-4 left-14">
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
           <button
             onClick={handleBack}
             className="px-6 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-all duration-300"
@@ -146,11 +104,6 @@ export default function ProductForm() {
             ⬅ Back to Categories
           </button>
         </div>
-<<<<<<< HEAD
-=======
-         </div>
-         
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
 
         <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
           <h2 className="text-2xl font-bold text-yellow-800 text-center mb-6">
@@ -172,14 +125,11 @@ export default function ProductForm() {
               className="w-full px-4 py-2 border rounded-lg"
               required
             ></textarea>
+
             <input
               type="number"
               name="price"
-<<<<<<< HEAD
               placeholder="Price"
-=======
-              placeholder="Discount Price"
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
               onChange={handleChange}
               className="w-full px-4 py-2 border rounded-lg"
               required
@@ -187,11 +137,7 @@ export default function ProductForm() {
             <input
               type="number"
               name="discountPrice"
-<<<<<<< HEAD
               placeholder="Discount Price (Optional)"
-=======
-              placeholder="Price"
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
               onChange={handleChange}
               className="w-full px-4 py-2 border rounded-lg"
             />
@@ -232,11 +178,7 @@ export default function ProductForm() {
             >
               <option value="">Select Category</option>
               {categories.map((category) => (
-<<<<<<< HEAD
                 <option key={category.name} value={category.name}>
-=======
-                <option key={category.id} value={category.id}>
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
                   {category.name}
                 </option>
               ))}
@@ -251,21 +193,11 @@ export default function ProductForm() {
             >
               <option value="">Select Subcategory</option>
               {product.category &&
-<<<<<<< HEAD
                 subcategories[product.category]?.map((sub: string) => (
                   <option key={sub} value={sub}>
                     {sub}
                   </option>
                 ))}
-=======
-
-              
-subcategories[product.category]?.map((sub) => (
-  <option key={sub.name} value={sub.name}>
-    {sub.name}
-  </option>
-))}
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
             </select>
 
             <select
@@ -322,10 +254,6 @@ subcategories[product.category]?.map((sub) => (
               Submit Product
             </button>
           </form>
-<<<<<<< HEAD
-=======
-          
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
         </div>
       </div>
     </div>

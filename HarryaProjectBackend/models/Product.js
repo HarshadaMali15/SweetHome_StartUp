@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-//models/Product.js 
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
 import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
@@ -25,10 +21,6 @@ const productSchema = new mongoose.Schema({
   sellerName: { type: String },
   contact: { type: String, required: true },
   location: { type: String, required: true },
-<<<<<<< HEAD
-=======
-  seller: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
   images: [{ type: String }], // Image URLs
 }, { timestamps: true });
 

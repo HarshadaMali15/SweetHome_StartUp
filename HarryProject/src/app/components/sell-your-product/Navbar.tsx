@@ -22,7 +22,11 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex-shrink-0">
-            <img className="h-12 w-auto" src="/homepage/Sweethome1.png" alt="Logo" />
+            <img
+              className="h-12 w-auto"
+              src="/homepage/Sweethome1.png"
+              alt="Logo"
+            />
           </div>
 
           <div className="flex items-center space-x-8 relative">
@@ -33,46 +37,54 @@ export default function Navbar() {
                   className="flex items-center space-x-2 text-gray-700 font-medium focus:outline-none"
                 >
                   <span>{seller.name}</span>
-                  <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7"></path>
+                  <svg
+                    className="w-4 h-4 text-gray-600"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    ></path>
                   </svg>
                 </button>
 
                 {isDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg  z-50">
-                  
-                    <Link href="/seller/profile" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                  <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+                    <Link
+                      href="/seller/profile"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    >
                       Profile
                     </Link>
-<<<<<<< HEAD
-                    <Link href="/seller/dashboard" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                    <Link
+                      href="/seller/dashboard"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    >
                       My Dashboard
                     </Link>
-                    <Link href="/seller/product" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                    <Link
+                      href="/seller/product"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    >
                       Product
                     </Link>
-                    {/* <Link href="/seller/order" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
-                      Order Tracking
-                    </Link> */}
-                     <Link href="/seller/payment" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
-                      Payment
-                    </Link>
-=======
-                    <Link href="/seller/product" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
-                      Product
-                    </Link>
-                    <Link href="/seller/orders" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                    <Link
+                      href="/seller/orders"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    >
                       My Orders
                     </Link>
-                    <Link href="/seller/feedbacks" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                    <Link
+                      href="/seller/feedbacks"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    >
                       Product Feedback
                     </Link>
-                   
-                    {/* <Link href="/seller/order" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
-                      Order Tracking
-                    </Link> */}
-                     
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
                     <button
                       onClick={handleLogout}
                       className="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100"
@@ -80,7 +92,6 @@ export default function Navbar() {
                       Logout
                     </button>
                   </div>
-                  
                 )}
               </div>
             ) : (

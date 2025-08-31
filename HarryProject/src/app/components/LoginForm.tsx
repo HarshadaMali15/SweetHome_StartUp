@@ -3,20 +3,18 @@
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
 import { useState } from "react";
-import { useRouter } from "next/navigation"; 
-<<<<<<< HEAD
+import { useRouter } from "next/navigation";
 import { useSellerAuth } from "@/context/authContextSeller";
 
-export default function LoginForm({ onClose, onSwitch }: { onClose: () => void, onSwitch: () => void }) {
+export default function LoginForm({
+  onClose,
+  onSwitch,
+}: {
+  onClose: () => void;
+  onSwitch: () => void;
+}) {
   const router = useRouter();
   const { setSeller } = useSellerAuth();
-=======
-import { useSellerAuth } from "@/context/authContextSeller"; // Add this line
-
-export default function LoginForm({ onClose, onSwitch }: { onClose: () => void, onSwitch: () => void }) {
-  const router = useRouter();
-  const { setSeller } = useSellerAuth(); // Ensure this is used
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -31,9 +29,8 @@ export default function LoginForm({ onClose, onSwitch }: { onClose: () => void, 
     setSuccess("");
 
     try {
-<<<<<<< HEAD
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/seller/login`, // ✅ now uses env var
+        `${process.env.NEXT_PUBLIC_API_URL}/api/seller/login`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -47,32 +44,14 @@ export default function LoginForm({ onClose, onSwitch }: { onClose: () => void, 
 
       if (!res.ok) throw new Error(data.message || "Login failed");
 
+      // ✅ Save seller in context
       setSeller(data.seller);
       setSuccess("Login successful!");
 
+      // ✅ redirect after short delay
       setTimeout(() => {
         router.push("/categories");
       }, 1000);
-=======
-      const res = await fetch("http://localhost:5000/api/seller/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-        credentials: "include",
-      });
-
-      const data = await res.json();
-      console.log("Login Response:", data); // Debugging
-
-      if (!res.ok) throw new Error(data.message);
-
-      setSeller(data.seller); // **Fix: Store logged-in user data**
-      setSuccess("Login successful!");
-
-      setTimeout(() => {
-        router.push("/categories"); 
-      }, 1000); 
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
     } catch (error: any) {
       setError(error.message);
     }
@@ -84,10 +63,6 @@ export default function LoginForm({ onClose, onSwitch }: { onClose: () => void, 
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-[9999]"
-<<<<<<< HEAD
-=======
-
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
     >
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
@@ -95,17 +70,27 @@ export default function LoginForm({ onClose, onSwitch }: { onClose: () => void, 
         exit={{ scale: 0.9, opacity: 0 }}
         className="bg-white rounded-lg p-8 shadow-xl max-w-md w-full relative"
       >
-        <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+        >
           <X size={24} />
         </button>
 
-        <h2 className="text-2xl font-bold mb-6 text-yellow-600">Login to Sell</h2>
+        <h2 className="text-2xl font-bold mb-6 text-yellow-600">
+          Login to Sell
+        </h2>
         {error && <p className="text-red-500">{error}</p>}
         {success && <p className="text-green-500">{success}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Email
+            </label>
             <input
               type="email"
               id="email"
@@ -116,7 +101,12 @@ export default function LoginForm({ onClose, onSwitch }: { onClose: () => void, 
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Password
+            </label>
             <input
               type="password"
               id="password"
@@ -138,7 +128,11 @@ export default function LoginForm({ onClose, onSwitch }: { onClose: () => void, 
 
           <p className="text-center text-gray-600">
             Don't have an account?{" "}
-            <button onClick={onSwitch} className="text-yellow-600 hover:text-yellow-700 transition-colors">
+            <button
+              onClick={onSwitch}
+              type="button"
+              className="text-yellow-600 hover:text-yellow-700 transition-colors"
+            >
               Sign Up
             </button>
           </p>

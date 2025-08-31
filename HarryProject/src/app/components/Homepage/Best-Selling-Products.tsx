@@ -52,17 +52,11 @@ export default function BestSellingProducts() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-bold">Best selling products</h2>
-<<<<<<< HEAD
           <Link href={"/sign-up"}>
-          <button className="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors">
-            View All
-          </button></Link>
-=======
-          {/* <Link href={"/sign-up"}>
-          <button className="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors">
-            View All
-          </button></Link> */}
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
+            <button className="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors">
+              View All
+            </button>
+          </Link>
         </div>
 
         {/* Products Grid */}
@@ -92,11 +86,7 @@ export default function BestSellingProducts() {
                 <h3 className="font-medium text-lg">{product.name}</h3>
 
                 {/* Rating */}
-<<<<<<< HEAD
                 <div className="flex items-center gap-1">
-=======
-                {/* <div className="flex items-center gap-1">
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
                   <div className="flex text-yellow-400">
                     <Star className="w-4 h-4 fill-current" />
                     <Star className="w-4 h-4 fill-current" />
@@ -105,11 +95,7 @@ export default function BestSellingProducts() {
                     <Star className="w-4 h-4 fill-current opacity-50" />
                   </div>
                   <span className="text-gray-500 text-sm">({product.reviews})</span>
-<<<<<<< HEAD
                 </div>
-=======
-                </div> */}
->>>>>>> 3ed0f0d1565ba25ce12b5f66732b9be9ed1bbe5f
 
                 {/* Price */}
                 <div className="flex items-center gap-2">
@@ -121,9 +107,10 @@ export default function BestSellingProducts() {
                 {/* Add to Cart */}
                 <div className="pt-2">
                   <Link href={"/sign-up"}>
-                  <button className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition-colors">
-                    Add to Cart
-                  </button></Link>
+                    <button className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition-colors">
+                      Add to Cart
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -133,4 +120,3 @@ export default function BestSellingProducts() {
     </section>
   )
 }
-
