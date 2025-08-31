@@ -60,6 +60,7 @@ export default function LoginForm() {
           credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
+          
         }
       );
 

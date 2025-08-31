@@ -24,6 +24,8 @@ export default function CartPage() {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   // Function to decide which price to use (discountPrice if available)
   const getUnitPrice = (item: CartItem) => {
     return item.product.discountPrice || item.product.price;
@@ -39,7 +41,7 @@ export default function CartPage() {
 
   const fetchCart = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/cart", {
+      const res = await fetch(`${API_URL}/api/cart`, {
         credentials: "include",
       });
       const data = await res.json();
@@ -53,7 +55,7 @@ export default function CartPage() {
 
   const updateQuantity = async (productId: string, newQuantity: number) => {
     try {
-      const res = await fetch("http://localhost:5000/api/cart/update", {
+      const res = await fetch(`${API_URL}/api/cart/update`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -99,7 +101,7 @@ export default function CartPage() {
             >
               <div className="relative h-20 w-20">
                 <Image
-                  src={`http://localhost:5000${item.product.images[0]}`}
+                  src={`${API_URL}${item.product.images[0]}`}
                   alt={item.product.name}
                   fill
                   className="object-cover rounded"

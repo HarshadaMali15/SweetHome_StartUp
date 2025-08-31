@@ -157,15 +157,23 @@ export default function EditProductForm() {
               ))}
             </select>
 
-            <select name="subcategory" value={product.subcategory} onChange={handleChange} className="w-full px-4 py-2 border rounded-lg" disabled={!product.category} required>
-              <option value="">Select Subcategory</option>
-              {product.category &&
-                subcategories[product.category]?.map((sub: string) => (
-                  <option key={sub} value={sub}>
-                    {sub}
-                  </option>
-                ))}
-            </select>
+            <select
+  name="subcategory"
+  value={product.subcategory}
+  onChange={handleChange}
+  className="w-full px-4 py-2 border rounded-lg"
+  disabled={!product.category}
+  required
+>
+  <option value="">Select Subcategory</option>
+  {product.category &&
+    subcategories[product.category]?.map((sub) => (
+      <option key={sub.name} value={sub.name}>
+        {sub.name}
+      </option>
+    ))}
+</select>
+
 
             <select name="returnPolicy" value={product.returnPolicy} onChange={handleChange} className="w-full px-4 py-2 border rounded-lg">
               <option value="No Return">No Return</option>

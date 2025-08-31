@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation"; // ✅ Fixed Import
+
 interface Order {
   _id: string;
   items: {
@@ -25,7 +25,7 @@ interface Order {
   trackingInfo: string;
   status: string;
   createdAt: string;
-  finalAmount?: number; // Mark optional to avoid type crash
+  finalAmount?: number;
 }
 
 export default function OrderSummaryPage() {
@@ -34,11 +34,14 @@ export default function OrderSummaryPage() {
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
-const router = useRouter();
+  const router = useRouter();
+
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   useEffect(() => {
     const fetchOrder = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/orders/user", {
+        const res = await fetch(`${API_URL}/api/orders/user`, {
           credentials: "include",
         });
         const data = await res.json();
@@ -53,15 +56,18 @@ const router = useRouter();
       }
     };
 
-    fetchOrder();
-  }, [orderId]);
+    if (orderId) {
+      fetchOrder();
+    }
+  }, [orderId, API_URL]);
+
   const handleBack = () => {
-    router.push("/shop") // Back to the main categories page
-  }
+    router.push("/shop");
+  };
+
   if (loading) return <p>Loading...</p>;
   if (!order) return <p>Order not found.</p>;
 
-  // Fallback total if finalAmount is missing
   const fallbackGrandTotal = order.items.reduce(
     (total, item) =>
       total + item.quantity * (item.product.discountPrice || item.product.price),
@@ -73,13 +79,13 @@ const router = useRouter();
   return (
     <div className="container mx-auto px-4 py-8 max-w-3xl">
       <div className="flex items-center justify-between mb-6">
-      <button
-            onClick={handleBack}
-            className="px-6 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700"
-          >
-            ← Back to Homepage
-          </button>
-          </div>
+        <button
+          onClick={handleBack}
+          className="px-6 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700"
+        >
+          ← Back to Homepage
+        </button>
+      </div>
       <h1 className="text-2xl font-bold mb-4">Order Summary</h1>
 
       <div className="border p-4 rounded mb-6">
@@ -98,7 +104,7 @@ const router = useRouter();
           >
             <div className="relative h-20 w-20">
               <Image
-                src={`http://localhost:5000${item.product.images[0]}`}
+                src={`${API_URL}${item.product.images[0]}`}
                 alt={item.product.name}
                 fill
                 className="object-cover rounded"
@@ -113,7 +119,8 @@ const router = useRouter();
               <p>Quantity: {item.quantity}</p>
               <p>
                 Line Total: ₹
-                {(item.quantity *
+                {(
+                  item.quantity *
                   (item.product.discountPrice || item.product.price)
                 ).toFixed(2)}
               </p>

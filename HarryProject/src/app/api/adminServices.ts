@@ -1,7 +1,9 @@
 // app/api/adminService.ts
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api'
+// API URL आता env मधून घे
+const API_URL = process.env.NEXT_PUBLIC_API_URL + '/api';
+
 // Create axios instance with auth header
 const apiClient = axios.create({
   baseURL: API_URL,
@@ -47,22 +49,21 @@ export const fetchDashboardData = async () => {
 };
 
 export const deleteUser = async (id: string) => {
-    const response = await apiClient.delete(`/admin/users/${id}`);
-    return response.data;
-  };
-  
-  export const deleteSeller = async (id: string) => {
-    const response = await apiClient.delete(`/admin/sellers/${id}`);
-    return response.data;
-  };
-  
-  export const deleteProduct = async (id: string) => {
-    const response = await apiClient.delete(`/admin/products/${id}`);
-    return response.data;
-  };
-  
-  export const deleteOrder = async (id: string) => {
-    const response = await apiClient.delete(`/admin/orders/${id}`);
-    return response.data;
-  };
-  
+  const response = await apiClient.delete(`/admin/users/${id}`);
+  return response.data;
+};
+
+export const deleteSeller = async (id: string) => {
+  const response = await apiClient.delete(`/admin/sellers/${id}`);
+  return response.data;
+};
+
+export const deleteProduct = async (id: string) => {
+  const response = await apiClient.delete(`/admin/products/${id}`);
+  return response.data;
+};
+
+export const deleteOrder = async (id: string) => {
+  const response = await apiClient.delete(`/admin/orders/${id}`);
+  return response.data;
+};

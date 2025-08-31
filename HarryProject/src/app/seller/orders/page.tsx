@@ -4,19 +4,18 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+interface Product {
+  _id: string;
+  name?: string;
+  images?: string[];
+  price?: number;
+  discountPrice?: number;
+}
+
 interface OrderItem {
-  product?: {
-    _id: string;
-    name?: string;
-    images?: string[] | null;
-    price?: number;
-    discountPrice?: number;
-    address?: string;
-    mobile?: string;
-  } | null;
+  product?: Product | null;
   quantity: number;
-  // line-item total or fallback from backend
-  price: number;
+  price: number; // fallback item price from backend
 }
 
 interface Order {
@@ -40,17 +39,19 @@ export default function SellerOrdersPage() {
   const [message, setMessage] = useState("");
   const router = useRouter();
 
+  // ✅ ENV var (fallback to localhost)
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
   const fetchSellerOrders = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/seller/seller", {
+      const res = await fetch(`${API_URL}/api/seller/seller`, {
         method: "GET",
         credentials: "include",
       });
+
       const data = await res.json();
       if (res.ok) {
         setOrders(Array.isArray(data.orders) ? data.orders : []);
-        // TEMP: inspect problematic items
-        // console.log("Orders:", data.orders);
       } else {
         setMessage(data.message || "Failed to fetch orders");
       }
@@ -75,6 +76,7 @@ export default function SellerOrdersPage() {
 
   return (
     <div className="container mx-auto px-4 py-8 ">
+      {/* Back Button */}
       <div className="flex items-center justify-between mb-6">
         <button
           onClick={handleBack}
@@ -87,13 +89,13 @@ export default function SellerOrdersPage() {
       <h1 className="text-3xl font-bold mb-4">My Sold Orders</h1>
 
       {orders.map((order) => (
-        <div key={order._id} className="border p-4 rounded mb-4">
-          <h2 className="text-xl font-semibold">Order ID: {order._id}</h2>
-          <p>Status: {order.status}</p>
-          <p>Delivery Estimation: {order.deliveryEstimation}</p>
+        <div key={order._id} className="border p-4 rounded mb-4 shadow-sm">
+          <h2 className="text-xl font-semibold">🛒 Order ID: {order._id}</h2>
+          <p>Status: <span className="font-medium">{order.status}</span></p>
+          <p>Delivery ETA: {order.deliveryEstimation}</p>
 
           <p>
-            <span className="font-medium">User: </span>
+            <span className="font-medium">Buyer: </span>
             {order.user?.name || "N/A"}
           </p>
           <p>
@@ -105,17 +107,18 @@ export default function SellerOrdersPage() {
             {order.user?.mobile || "N/A"}
           </p>
 
+          {/* Order Items */}
           <div className="mt-4">
             {order.items.map((item, idx) => {
               const product = item.product || null;
               const key = product?._id ?? `${order._id}-${idx}`;
 
-              // Fallback card when product is missing (deleted/unavailable)
+              // ❌ Product missing (deleted/unavailable)
               if (!product) {
                 return (
                   <div
                     key={key}
-                    className="flex items-center space-x-4 border p-2 rounded mb-2"
+                    className="flex items-center space-x-4 border p-2 rounded mb-2 bg-gray-50"
                   >
                     <div className="h-16 w-16 flex items-center justify-center bg-gray-200 rounded">
                       <span className="text-xs text-gray-500">No Product</span>
@@ -131,13 +134,17 @@ export default function SellerOrdersPage() {
                 );
               }
 
-              const hasImage = Array.isArray(product.images) && product.images.length > 0;
+              const hasImage =
+                Array.isArray(product.images) && product.images.length > 0;
               const imageSrc = hasImage
-                ? `http://localhost:5000${product.images![0]}`
+                ? `${API_URL}${product.images![0]}`
                 : null;
 
               const unitPrice =
-                (product.discountPrice ?? product.price ?? item.price ?? 0);
+                product.discountPrice ??
+                product.price ??
+                item.price ??
+                0;
 
               return (
                 <div

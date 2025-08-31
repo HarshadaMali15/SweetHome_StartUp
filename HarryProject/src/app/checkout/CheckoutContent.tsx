@@ -16,6 +16,8 @@ interface Product {
   deliveryTime: string;
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+
 export default function CheckoutContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -34,7 +36,7 @@ export default function CheckoutContent() {
     async function fetchProduct() {
       if (!productId) return;
       try {
-        const res = await fetch(`http://localhost:5000/api/products/${productId}`);
+        const res = await fetch(`${API_URL}/products/${productId}`);
         if (!res.ok) throw new Error("Failed to fetch product details");
         const data = await res.json();
         setProduct(data.product);
@@ -100,7 +102,7 @@ export default function CheckoutContent() {
 
   const createOrder = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/orders/create", {
+      const res = await fetch(`${API_URL}/orders/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
