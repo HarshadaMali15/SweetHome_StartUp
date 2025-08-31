@@ -132,7 +132,8 @@ export default function CheckoutContent() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-2xl">
-      <ToastContainer />
+      <ToastContainer aria-label="Notification messages" />
+
       <h1 className="text-2xl font-bold mb-4">Checkout</h1>
       {message && <div className="mb-4 text-red-600">{message}</div>}
       
