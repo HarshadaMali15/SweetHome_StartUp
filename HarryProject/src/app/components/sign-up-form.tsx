@@ -28,7 +28,7 @@ export default function SignUpForm() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [touched, setTouched] = useState<Record<string, boolean>>({})
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://sweet-home-start-up.vercel.app"
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://sweet-home-start-up.vercel.app/"
 
   // ✅ Validation functions
   const validateName = (name: string): ValidationState => {

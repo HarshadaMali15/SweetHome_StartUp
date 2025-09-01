@@ -21,13 +21,13 @@ export default function EditProductForm({ productId }: { productId: string }) {
     paymentMode: "COD",
     contact: "",
     location: "",
-    images: [] as File[], // Stores an array of files
+    images: [] as File[],
   });
 
   const [loading, setLoading] = useState(true);
 
-  // ✅ Use your deployed backend URL (not localhost)
-  const API_BASE = "https://sweet-home-start-up.vercel.app";
+  // ✅ Use environment variable and remove trailing slash
+  const API_BASE = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
 
   // Fetch existing product details
   useEffect(() => {
@@ -56,7 +56,7 @@ export default function EditProductForm({ productId }: { productId: string }) {
     }
 
     fetchProduct();
-  }, [productId]);
+  }, [productId, API_BASE]);
 
   // Handle text, select, and textarea inputs
   const handleChange = (
@@ -82,12 +82,15 @@ export default function EditProductForm({ productId }: { productId: string }) {
 
     const formData = new FormData();
 
+    // Append all fields except images
     Object.keys(product).forEach((key) => {
       if (key !== "images" && product[key as keyof typeof product]) {
-        formData.append(key, product[key as keyof typeof product] as string);
+        // Convert all values to string for FormData
+        formData.append(key, String(product[key as keyof typeof product]));
       }
     });
 
+    // Append images
     product.images.forEach((file) => {
       formData.append("images", file);
     });
@@ -187,20 +190,21 @@ export default function EditProductForm({ productId }: { productId: string }) {
               </select>
 
               <select
-                name="subcategory"
-                value={product.subcategory}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg"
-                required
-              >
-                <option value="">Select Subcategory</option>
-                {product.category &&
-                  subcategories[product.category]?.map((sub: string) => (
-                    <option key={sub} value={sub}>
-                      {sub}
-                    </option>
-                  ))}
-              </select>
+  name="subcategory"
+  value={product.subcategory}
+  onChange={handleChange}
+  className="w-full px-4 py-2 border rounded-lg"
+  required
+>
+  <option value="">Select Subcategory</option>
+  {product.category &&
+    subcategories[product.category]?.map((sub) => (
+      <option key={sub.name} value={sub.name}>
+        {sub.name}
+      </option>
+    ))}
+</select>
+
 
               <input
                 type="file"
