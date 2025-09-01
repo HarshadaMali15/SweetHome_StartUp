@@ -29,7 +29,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://sweethome-psi.vercel.app",
+      "https://sweet-home-start-up.vercel.app/",
       "https://sweet-home-start-up-s82z.vercel.app"
     ],
     credentials: true,
